@@ -303,7 +303,7 @@ mutatja néhány különböző paraméter mellett:
 <img src="README_files/figure-gfm/unnamed-chunk-2-1.png" width="100%" />
 
 Az ötlet a következő: mi van akkor, ha valaki megsúgja nekünk, hogy a
-magyar kiérkezési adatok lognormális eloszlást követnek? Első ránézésre
+magyar kiérkezési idők lognormális eloszlást követnek? Első ránézésre
 ezzel nem vagyunk sokkal beljebb: mint láttuk, nagyon sokféle konkrét
 lognormális eloszlás van attól függően, hogy milyen paramétert
 választunk – még ha tudjuk is (a súgásnak köszönhetően), hogy
@@ -356,8 +356,8 @@ Az eredmények között ezért fog nem csak a lognormális, hanem több egyéb
 név is megjelenni. Ezek tartománya mutatja azt a bizonytalanságot, ami
 abból fakad, hogy nem tudjuk pontosan melyik eloszlás érvényes; de
 szerencsére, mint majd látni fogjuk, elég közel futnak egymáshoz.
-Természetesen a módszer az ellen nem véd, ha valamilyen teljesen más
-eloszlás érvényes.
+Természetesen ez azon nem segít, ha valamilyen teljesen más eloszlás
+érvényes.
 
 Szerencsére ez mind statisztikai megfontolások, mind szakirodalmi adatok
 alapján nem túl valószínű, így a kapott becslések jól védhetőek, de
@@ -529,8 +529,8 @@ esetben a 0,9-kvantilist kell kiszámolni.
 
 De hogyan kapjuk meg az eloszlás paramétereit? Ha a lognormális
 eloszlással kezdünk, akkor nagyon könnyűnek tűnik a probléma, hiszen a
-lognormális várható értéke $e^{\mu + \frac{\sigma^2}{2}}$,
-szórásnégyzete $e^{\mu}$, így a feladat lényegében az, hogy a következő
+lognormális várható értéke $e^{\mu + \frac{\sigma^2}{2}}$, mediánja
+$e^{\mu}$, így a feladat lényegében az, hogy a következő
 egyenletrendszert oldjuk meg $\mu$-re és $\sigma^2$-re ($\overline{x}$
 az átlag, $m$ a medián):
 
