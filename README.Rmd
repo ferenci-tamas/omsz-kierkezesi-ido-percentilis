@@ -2,7 +2,7 @@
 title: "Az Országos Mentőszolgálat kiérkezési statisztikáinak vizsgálata: a 90. percentilis becslése"
 author:
   - Ferenci Tamás (https://www.medstat.hu/)
-date: "`r Sys.Date()`"
+date: "<br>2025. február 11."
 lang: hu-HU
 bibliography: OMSZ-kierkezesi-ido-references.bib
 link-citations: true
@@ -106,7 +106,7 @@ Szerencsére ez mind statisztikai megfontolások, mind szakirodalmi adatok alapj
 
 ## Eredmények
 
-A kapott számszerű eredményeimet elérhetővé tettem bármilyen további gépi feldolgozásra, megtekintésre jól alkalmas CSV, illetve R nyelven feldolgozható RDS formátumban.
+A kapott számszerű eredményeimet elérhetővé tettem bármilyen további gépi feldolgozásra, megtekintésre jól alkalmas [CSV](https://github.com/tamas-ferenci/omsz-kierkezesi-ido-percentilis/blob/main/OMSZ-kierkezesi-ido.csv), illetve R nyelven feldolgozható [RDS](https://github.com/tamas-ferenci/omsz-kierkezesi-ido-percentilis/blob/main/OMSZ-kierkezesi-ido.rds) formátumban.
 
 Itt néhány egyszerű vizualizációt közlök a kapott eredmények szemléltetésére. Az eredményeket mindenhol prioritás szerint lebontva közlöm, a dolognak csak így van értelme. A prioritásokban eligzítást nyújt az OMSZ [egyik útmutatója](https://oktatas.mentok.hu/pluginfile.php/258749/mod_resource/content/1/Kerdezesi_protokoll_mentesiranyitok_reszere_v2.0_2023.12.19.pdf).
 
