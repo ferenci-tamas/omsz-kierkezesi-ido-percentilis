@@ -242,7 +242,7 @@ Egy szó mint száz: úgy tűnik, hogy a lognormális eloszlással egyszerűen s
 
 A kérdés innentől inkább számítástechnikai. Próbáljunk a dologra egy univerzális megoldást adni!
 
-Először is, kell egy célfüggvény. Ez azt kell, hogy leírja, hogy a numerikusan kiszámolt várható érték és szórásnégyzet egyezik-e a megadott értékkel. Pontosabban szólva, numerikus optimalizálásról lévén szó, nem egyezik, hanem közel van hozzá, magyarul a célfüggvény azt kell lemérje, hogy mennyire vagyunk közel. Nagyképűen ez többkritériumú probléma (hiszen a várható érték is van valamennyire a valóditól, meg a medián is), de mivel bízhatunk abban, hogy kb. tökéletes megoldást tudunk találni, így ennek remélhetőleg nem lesz nagy jelentősége, egyszerűen használjuk a két eltérés négyzetének sima összegét (ezzel azt is mondtuk, hogy az eltéréseknél a négyzetet használjuk, vélhetően szintén azt fogjuk tapasztalni, hogy ennek nincs jelentősége). Például:
+Először is, kell egy célfüggvény. Ez azt kell, hogy leírja, hogy a numerikusan kiszámolt várható érték és medián egyezik-e a megadott értékkel. Pontosabban szólva, numerikus optimalizálásról lévén szó, nem egyezik, hanem közel van hozzá, magyarul a célfüggvény azt kell lemérje, hogy mennyire vagyunk közel. Nagyképűen ez többkritériumú probléma (hiszen a várható érték is van valamennyire a valóditól, meg a medián is), de mivel bízhatunk abban, hogy kb. tökéletes megoldást tudunk találni, így ennek remélhetőleg nem lesz nagy jelentősége, egyszerűen használjuk a két eltérés négyzetének sima összegét (ezzel azt is mondtuk, hogy az eltéréseknél a négyzetet használjuk, vélhetően szintén azt fogjuk tapasztalni, hogy ennek nincs jelentősége). Például:
 
 ```{r, eval = FALSE}
 errlnorm <- function(par, mean, median) {
