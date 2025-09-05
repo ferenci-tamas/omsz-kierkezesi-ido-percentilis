@@ -1,8 +1,7 @@
 ---
 title: "Az Országos Mentőszolgálat kiérkezési statisztikáinak vizsgálata: a 90. percentilis becslése"
-author:
-  - Ferenci Tamás (https://www.medstat.hu/)
-date: "<br>2025. február 11."
+author: Ferenci Tamás (https://www.medstat.hu/)<br>
+date: "`r gsub('  ', ' ', format(Sys.time(), '%Y. %B %e.'))`"
 lang: hu-HU
 bibliography: OMSZ-kierkezesi-ido-references.bib
 link-citations: true

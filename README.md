@@ -1,8 +1,8 @@
 Az Országos Mentőszolgálat kiérkezési statisztikáinak vizsgálata: a 90.
 percentilis becslése
 ================
-Ferenci Tamás (<https://www.medstat.hu/>)
-<br>2025. február 11.
+Ferenci Tamás (<https://www.medstat.hu/>)<br>
+2025. szeptember 5.
 
 - [Összefoglaló](#összefoglaló)
 - [Problémafelvetés](#problémafelvetés)
