@@ -145,7 +145,7 @@ kiérkezésről beszélünk; lényegében tehát megadja, hogy ha *tényleg*
 mindenkihez ugyanannyi idő alatt ért volna ki a mentő, akkor az hány
 perc volna (ha közben a kiérkezési idők összege állandó maradna). Az
 átlag problémáit részletesen tárgyalja az
-[irodalom](https://tamas-ferenci.github.io/FerenciTamas_BevezetesABiostatisztikaba/deskriptiv.html#deskriptivmennyegyvaltanalitikusmutatoszamokcentralistendencia),
+[irodalom](https://ferenci-tamas.github.io/biostatisztika/deskriptiv.html#sec-kozepertekek),
 itt most csak annyit említek meg, hogy érzékeny a kilógó értékekre: ha
 van – akár csak kis számú – de a többitől lényegesen eltérő érték, akkor
 azok „elhúzzák” az átlagot maguk felé, ami miatt az többé már nem igazán
@@ -288,7 +288,7 @@ bárki számára, magyarázattal ellátva letölthető), de addig is, van még
 egy lehetőség.
 
 A valószínűségszámításban és statisztikában [szoktunk
-beszélni](https://tamas-ferenci.github.io/FerenciTamas_AValoszinusegszamitasEsAStatisztikaAlapvonalai/)
+beszélni](https://ferenci-tamas.github.io/valoszinusegszamitas-statisztika/)
 eloszlásokról; ez lényegében a fenti ábrán is szereplő viselkedést
 („hogyan oszlik el a kiérkezési idő?”) igyekszik matematikai
 formalizmussal megragadni és leírni. A dolgot úgy kell elképzelni, hogy
@@ -370,9 +370,9 @@ azzal, hogy közli a tényadatokat.
 
 A kapott számszerű eredményeimet elérhetővé tettem bármilyen további
 gépi feldolgozásra, megtekintésre jól alkalmas
-[CSV](https://github.com/tamas-ferenci/omsz-kierkezesi-ido-percentilis/blob/main/OMSZ-kierkezesi-ido.csv),
+[CSV](https://github.com/ferenci-tamas/omsz-kierkezesi-ido-percentilis/blob/main/OMSZ-kierkezesi-ido.csv),
 illetve R nyelven feldolgozható
-[RDS](https://github.com/tamas-ferenci/omsz-kierkezesi-ido-percentilis/blob/main/OMSZ-kierkezesi-ido.rds)
+[RDS](https://github.com/ferenci-tamas/omsz-kierkezesi-ido-percentilis/blob/main/OMSZ-kierkezesi-ido.rds)
 formátumban.
 
 Itt néhány egyszerű vizualizációt közlök a kapott eredmények
@@ -464,10 +464,9 @@ alapján.
 
 A feladat megoldásához az R statisztikai nyelvet és számítási
 környezetet fogjuk használni (érdeklődőknek merem ajánlani a készülőben
-lévő
-[jegyzetemet](https://tamas-ferenci.github.io/ferenci-tamas-r-nyelv/),
-illetve [YouTube-csatornám](https://www.youtube.com/@FerenciTamas)
-idevágó videóit, ha szeretnének megismerkedni ezzel a nyelvvel). Az
+lévő [jegyzetemet](https://ferenci-tamas.github.io/r-nyelv/), illetve
+[YouTube-csatornám](https://www.youtube.com/@FerenciTamas) idevágó
+videóit, ha szeretnének megismerkedni ezzel a nyelvvel). Az
 adatfeldolgozás megkönnyítéséhez a `data.table`, a vizualizációhoz a
 `ggplot2` csomagokat fogjuk használni:
 
