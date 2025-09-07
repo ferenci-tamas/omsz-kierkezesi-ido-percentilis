@@ -543,8 +543,7 @@ $$
 A dolog nem nehéz: a második egyenletből $\mu = \log m$ (a $\log$ alatt
 mindenhol természetes alapú logaritmust értek), ezt az elsőbe
 helyettesítve rögtön kapjuk, hogy
-$\sigma^2 = 2 \cdot \left(\log\bar{x} - \log m\right)$, és ezzel meg is
-vagyunk.
+$\sigma^2 = 2 \cdot \left(\log\bar{x} - \log m\right)$ .
 
 So far so good, ahogy a művelt francia mondaná. Igen ám, csakhogy. Mi a
 helyzet a Weibull-eloszlással? Az egyenletrendszer:
