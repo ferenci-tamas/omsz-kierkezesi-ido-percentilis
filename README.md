@@ -886,7 +886,7 @@ saveRDS(RawDataProc, "OMSZ-kierkezesi-ido-long.rds")
   átlag 10-szerese. Ez már valami, és válasz a kérdésre, csak nagyon
   gyenge. Lehet élesíteni? Lehet adni nem csak felső, de alsó korlátot
   is…?)
-- A log-${t}$ eloszlást illesztő megoldásnál kipróbálni azt, hogy minden
+- A log–$t$ eloszlást illesztő megoldásnál kipróbálni azt, hogy minden
   lehetséges szabadsági fokkal mi az eredmények tartománya (így megoldva
   a három-paraméteres problémát). Igazából lehet, hogy elég lenne
   $\nu=1$-gyel, hiszen ez van a legtávolabb a lognormálistól, amit

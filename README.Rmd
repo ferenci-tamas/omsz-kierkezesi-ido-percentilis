@@ -426,7 +426,7 @@ saveRDS(RawDataProc, "OMSZ-kierkezesi-ido-long.rds")
 ## Nyitott kérdések, továbbfejlesztési lehetőségek
 
 - Adható-e valamilyen elméleti abszolút korlát arra, hogy adott átlag és medián mellett hol lehet a 0,9-kvantilis? (A Markov-egyenlőtlenség például azt mondja, ha nem tévedek, hogy biztosan kisebb, mint az átlag 10-szerese. Ez már valami, és válasz a kérdésre, csak nagyon gyenge. Lehet élesíteni? Lehet adni nem csak felső, de alsó korlátot is...?)
-- A log-${t}$ eloszlást illesztő megoldásnál kipróbálni azt, hogy minden lehetséges szabadsági fokkal mi az eredmények tartománya (így megoldva a három-paraméteres problémát). Igazából lehet, hogy elég lenne $\nu=1$-gyel, hiszen ez van a legtávolabb a lognormálistól, amit amúgyis használunk.
+- A log--$t$ eloszlást illesztő megoldásnál kipróbálni azt, hogy minden lehetséges szabadsági fokkal mi az eredmények tartománya (így megoldva a három-paraméteres problémát). Igazából lehet, hogy elég lenne $\nu=1$-gyel, hiszen ez van a legtávolabb a lognormálistól, amit amúgyis használunk.
 - Kicsit jobb optimalizáló-algoritmus használata (így is jó, de azért a `P90` és a `P90lnorm` között illene, hogy kb. nulla legyen a különbség).
 
 ## Irodalomjegyzék
