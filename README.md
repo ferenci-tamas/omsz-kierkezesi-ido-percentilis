@@ -530,12 +530,12 @@ De hogyan kapjuk meg az eloszlás paramétereit? Ha a lognormális
 eloszlással kezdünk, akkor nagyon könnyűnek tűnik a probléma, hiszen a
 lognormális várható értéke $e^{\mu + \frac{\sigma^2}{2}}$, mediánja
 $e^{\mu}$, így a feladat lényegében az, hogy a következő
-egyenletrendszert oldjuk meg $\mu$-re és $\sigma^2$-re ($\overline{x}$
-az átlag, $m$ a medián):
+egyenletrendszert oldjuk meg $\mu$-re és $\sigma^2$-re ($\bar{x}$ az
+átlag, $m$ a medián):
 
 $$
 \begin{align}
-e^{\mu + \frac{\sigma^2}{2}} &= \overline{x} \\
+e^{\mu + \frac{\sigma^2}{2}} &= \bar{x} \\
 e^{\mu} &= m
 \end{align}
 $$
@@ -543,14 +543,14 @@ $$
 A dolog nem nehéz: a második egyenletből $\mu = \log m$ (a $\log$ alatt
 mindenhol természetes alapú logaritmust értek), ezt az elsőbe
 helyettesítve rögtön kapjuk, hogy
-$\sigma^2 = 2 \cdot \left(\log\overline{x} - \log m\right)$.
+$\sigma^2 = 2 \cdot \left(\log\bar{x} - \log m\right)$.
 
 So far so good, ahogy a művelt francia mondaná. Igen ám, csakhogy. Mi a
 helyzet a Weibull-eloszlással? Az egyenletrendszer:
 
 $$
 \begin{align}
-\lambda \cdot \Gamma\left(1 + 1/k\right) &= \overline{x} \\
+\lambda \cdot \Gamma\left(1 + 1/k\right) &= \bar{x} \\
 \lambda \cdot \left(\log 2\right)^{1/k} &= m
 \end{align}
 $$
