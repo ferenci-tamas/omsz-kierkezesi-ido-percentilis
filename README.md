@@ -17,7 +17,7 @@ Ferenci Tamás (<https://www.medstat.hu/>)<br>
 
 ## Összefoglaló
 
-- Egy blog a minap
+- 2025 februárjában egy blog
   [közölte](https://rontgen.444.hu/2025/02/10/bozotharc-aran-sikerult-megszerezni-az-orszagos-mentoszolgalat-kierkezesi-statisztikajat-a-szamoktol-nem-lesz-boldog-senki)
   az Országos Mentőszolgálat (OMSZ) kiérkezési időkre vonatkozó
   statisztikáit. Jellemző, hogy olyan adatokat, amiket mondjuk Angliában
