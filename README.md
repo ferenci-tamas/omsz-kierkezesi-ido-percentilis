@@ -68,6 +68,11 @@ Ferenci Tamás (<https://www.medstat.hu/>)<br>
 - Újra hangsúlyozom, hogy ez egy becslés, de szerencsére nincsen semmi
   gond, mert ha a becslésem rossz lenne, akkor ezt a kérdést az OMSZ egy
   pillanat alatt tisztázhatja azzal, hogy közli a tényadatokat.
+- A fenti eredményeimet közlő egyik internetes portál hosszas
+  levelezésbe kezdett az OMSZ-szal. E levélváltás statisztikai
+  relevanciája ugyan csekély, mégis melegen ajánlom [az
+  elolvasását](https://telex.hu/belfold/2025/02/18/orszagos-mentoszolgalat-omsz-mentok-kierkezesi-idok-kunetz-zsombor-ferenci-tamas-gyorfi-pal-levelezes-transzparencia-adatok),
+  mert *nagyon* tanulságos.
 
 ## Problémafelvetés
 
