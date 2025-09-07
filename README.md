@@ -422,6 +422,12 @@ percentilis:
 Az utóbbi időben országosan 40-45 perc körül, Budapesten 60-70 perc
 körül alakult a becsült 90. percentilis a P2 prioritási kategóriában.
 
+Zárásként megjegyzem, hogy a fenti eredményeimet közlő egyik internetes
+portál hosszas levelezésbe kezdett az OMSZ-szal. E levélváltás
+statisztikai relevanciája ugyan csekély, mégis melegen ajánlom [az
+elolvasását](https://telex.hu/belfold/2025/02/18/orszagos-mentoszolgalat-omsz-mentok-kierkezesi-idok-kunetz-zsombor-ferenci-tamas-gyorfi-pal-levelezes-transzparencia-adatok),
+mert *nagyon* tanulságos.
+
 ## Módszertani részletek
 
 ### Felhasznált eloszlások
