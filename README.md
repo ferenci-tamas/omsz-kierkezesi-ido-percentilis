@@ -2,11 +2,18 @@ Az Országos Mentőszolgálat kiérkezési statisztikáinak vizsgálata: a 90.
 percentilis becslése
 ================
 Ferenci Tamás (<https://www.medstat.hu/>)<br>
-2025. szeptember 7.
+2025. szeptember 8.
 
 - [Összefoglaló](#összefoglaló)
+- [Bevezetés](#bevezetés)
+  - [Középértékek](#középértékek)
+  - [A széli viselkedés mutatói](#a-széli-viselkedés-mutatói)
 - [Problémafelvetés](#problémafelvetés)
 - [Eredmények](#eredmények)
+  - [Kiemelt P1 prioritás](#kiemelt-p1-prioritás)
+  - [P1 prioritás](#p1-prioritás)
+  - [P2 prioritás](#p2-prioritás)
+  - [Záró megjegyzés](#záró-megjegyzés)
 - [Módszertani részletek](#módszertani-részletek)
   - [Felhasznált eloszlások](#felhasznált-eloszlások)
   - [Számítástechnikai részletek](#számítástechnikai-részletek)
@@ -74,7 +81,7 @@ Ferenci Tamás (<https://www.medstat.hu/>)<br>
   elolvasását](https://telex.hu/belfold/2025/02/18/orszagos-mentoszolgalat-omsz-mentok-kierkezesi-idok-kunetz-zsombor-ferenci-tamas-gyorfi-pal-levelezes-transzparencia-adatok),
   mert *nagyon* tanulságos.
 
-## Problémafelvetés
+## Bevezetés
 
 Bármely mentőszolgálat működésének egy nagyon fontos, közvélemény
 számára pedig talán legfontosabb minőségi mutatója a **kiérkezési idő**,
@@ -140,82 +147,89 @@ perces felbontásban). Volt 416 eset, ahol 5 percen belül kiért a mentő,
 így tovább. A legszerencsésebb embernek 1.9 percet kellett várnia, a
 legpechesebbnek 81.9 percet.
 
-Hogyan jellemezzük a helyzetet egy, vagy legfeljebb néhány számba
+De hogyan jellemezzük a helyzetet egy, vagy legfeljebb néhány számba
 sűrítve? Hiszen, ahogy volt róla szó, nekünk valamilyen indikátor,
-mérőszám kellene a mentőellátás minőségének jellemzésére. A két
-legismertebb mutató erre a célra az átlag és a medián.
+mérőszám kellene a mentőellátás minőségének, jelen esetben a kiérkezési
+időnek a jellemzésére.
+
+### Középértékek
+
+Sok szempontból a legkézenfekvőbb kérdés, hogy mi a *közepes* kiérkezési
+idő; ennek jellemzésére a két legismertebb mutató az átlag és a
+medián[^1].
 
 Az **átlag** a kiérkezési idők összege osztva azzal, hogy hány
-kiérkezésről beszélünk; lényegében tehát megadja, hogy ha *tényleg*
+kiérkezésről beszélünk; lényegében tehát megadja, hogy ha tényleg
 mindenkihez ugyanannyi idő alatt ért volna ki a mentő, akkor az hány
-perc volna (ha közben a kiérkezési idők összege állandó maradna). Az
-átlag problémáit részletesen tárgyalja az
+perc volna ha közben a kiérkezési idők összege állandó maradna. (Azt is
+mondhatnánk, hogy ha az összes kiérkezési időt egyenletesen elosztanánk,
+akkor mennyi jutna egy esetre.) Az átlag közismert, könnyen értelmezhető
+és egy sor előnyös tulajdonsággal bíró mutató. Van azonban néhány
+jellemző problémája is, ezeket részletesen tárgyalja az
 [irodalom](https://ferenci-tamas.github.io/biostatisztika/deskriptiv.html#sec-kozepertekek),
 itt most csak annyit említek meg, hogy érzékeny a kilógó értékekre: ha
 van – akár csak kis számú – de a többitől lényegesen eltérő érték, akkor
 azok „elhúzzák” az átlagot maguk felé, ami miatt az többé már nem igazán
-„tipikus” érték lesz. Ez a probléma itt is jelentkezik, mert a fenti
-eloszlás nem szimmetrikus, a statisztikusok úgy mondják: ferde az
-eloszlás, mert az egyik irányban van egy szigorú korlátja (0 perc), a
-másik irányban viszont szabadon tud szóródni. A dolog végeredménye, hogy
-felfelé előfordulnak, ha nem is gyakran, de előfordulnak a többitől
-nagyobb, akár lényegesen nagyobb értékek, amit nem tudnak ellensúlyozni
-a másik irányban kilógó értékek, hiszen a kiérkezési idő 0 alá nem
-mehet. A fenti példában az átlag 13.8 perc. Tipikus érték ez? Ez nem
-igazán jó kérdés, mert hát mi az, hogy „tipikus”, de az mindenesetre
-elmondható, hogy az esetek 60.3%-a kisebb ennél! Sokan vitatkoznának,
-hogy mennyire „tipikus” ez a kiérkezési idő, ha egyszer az esetek
-majdnem kétharmadában jobb a helyzet! (Egyébként pontosan ugyanez a
-helyzet a jövedelmekkel, azok eloszlása is ferde, ezért van az, hogy az
-átlag-jövedelem sem feltétlenül szerencsés mutató önmagában. Nem tudom
-megállni, hogy e ponton ne idézzem a legjobb magyar nyelvű
-[biostatisztika könyv](http://biostatkonyv.hu/) példáját: a magyar
-lakosság 99%-ának az átlagosnál több lába van! És tényleg, gondoljuk
-végig: 1 vagy 0 lába néhányaknak sajnos van – erről történetesen [pont
-én is](https://hunvascdata.hu/) bőven tudnék adatokat mondani –, 3 vagy
-több azonban nem igazán, így a magyar lakosság átlagos lábszáma 1,99.
-Tehát a lakosság 99%-ának valóban az átlagosnál több lába van! Ez
-ugyanaz, ferde eloszlás, csak, ahogy a statisztikusok mondják, egy
-diszkrét eloszlással.)
+„közepes” érték lesz. Ez a probléma nem csak akkor jelentkezik, ha
+valamilyen adatbeviteli hiba van, hanem például jelen esetben is, mert a
+fenti eloszlás nem szimmetrikus, a statisztikusok úgy mondják: ferde az
+eloszlás, mert az egyik irányban van egy szigorú korlátja (0 perc alá
+nem mehet a kiérkezési idő), a másik irányban viszont szabadon tud
+szóródni. A dolog végeredménye, hogy felfelé, ha nem is gyakran, de
+előfordulnak a többitől nagyobb, akár lényegesen nagyobb értékek, amit
+nem tudnak ellensúlyozni a másik irányban kilógó értékek, hiszen a
+kiérkezési idő 0 alá nem mehet. A fenti példában az átlag 13.8 perc.
+Közepes érték ez? Ez nem igazán jó kérdés, mert hát mi az, hogy
+„közepes”, de az mindenesetre elmondható, hogy az esetek 60.3%-a kisebb
+ennél! Sokan vitatkoznának, hogy mennyire „közepes” ez a kiérkezési idő,
+ha egyszer az esetek majdnem kétharmadában jobb a helyzet[^2]! Fontos
+hangsúlyozni, hogy nem arról van szó, hogy „elromlott” az átlag, az
+átlag tényleg ennyi (ezen belül is különösen: valóban ilyen nagy érték
+kell, hogy kijöjjön az az összeg, amiben – a ferdeség miatt – nagy
+pozitív értékek vannak, de nagy negatív értékek nincsenek), egyszerűen
+arról van szó, hogy az a fajta közepesség, amit az átlag definíciója
+kiad, nem feltétlenül esik egybe a hétköznapi érzésünkkel arról, hogy mi
+„közepes”. Ez nem az átlag hibája, legfeljebb arról van szó, hogy
+szükség van más mutatóra, vagy más mutatóra is, ami jobban megfelel a
+hétköznapi érzésünknek.
 
 Ez a gondolat vezet el minket a következő mutatóhoz, ami nem más, mint a
-**medián**. A medián az az idő, amin belül a betegek feléhez értek ki
-(ebből fakadóan a feléhez ennél lassabban értek ki). A medián kiérkezési
-idő tehát egyszerűen a nagyság szerint sorbarendezett kiérkezési idők
-közül a középső. A fenti példában a medián kiérkezési idő 12.1 perc volt
-– ennyi időn belül értek ki az esetek feléhez, ebből fakadóan a betegek
-fele ennél több időt volt kénytelen várni. A mediánt sokkal kevésbé
-sújtja a kilógó értékek fent említett problémája, úgy szokták mondani,
-hogy robusztus mutató. (Gondoljuk végig: ha a fenti példában fogunk egy
-80 perces kiérkezést és lecseréljük 80 évre, akkor az átlag teljesen
-értelmetlenné válik – a medián viszont meg sem moccan, még ebben a
-teljesen extrém esetben sem!) Vannak bizonyos hátrányai is, de ezen
+**medián**. A medián az az idő, amire igaz, hogy ennyin belül a betegek
+feléhez értek ki (ebből fakadóan a feléhez ennél lassabban értek ki). A
+medián kiérkezési idő tehát egyszerűen a nagyság szerint sorbarendezett
+kiérkezési idők közül a középső. A fenti példában a medián kiérkezési
+idő 12.1 perc volt – ennyi időn belül értek ki az esetek feléhez, ebből
+fakadóan a betegek fele volt kénytelen várni ennél több időt. A mediánt
+sokkal kevésbé sújtja a kilógó értékek fent említett problémája[^3], úgy
+szokták mondani, hogy robusztus mutató. Ez igaz az adathibákra is, de
+ami most a számunkra fontos, igaz a ferde eloszlásokra is – ezért lehet
+az, hogy a medián értéke jobban megfelel a hétköznapi benyomásunknak
+arról, hogy mi „közepes”. Vannak bizonyos hátrányai is[^4], de ezen
 előnye miatt ferde eloszlásoknál nagyon gyakori a medián használata.
 
-A kérdést lehetne még hosszan boncolgatni, azért nem teszem, mert a
-problémakör, amit most vizsgálni szeretnék, más. Nincs semmi baj sem az
-átlaggal, sem a mediánnal, de mindkettő ún. **középérték**, tehát a
-közepes („tipikus”, „jellemző”, „gyakori”, pláne idézőjelben „átlagos”…
-ilyeneket szoktak mondani, egyik rosszabb mint a másik, nincs nagy
-jelentősége, igazából ez inkább már szómágia) értékét igyekeznek
-jellemezni az eloszlásnak. Csakhogy: a kiérkezési időknél, pláne a magas
-prioritásoknál, életveszélyes helyzetekben, nem csak ez fontos! Nem csak
-az számít, hogy mi a *közepes* kiérkezési idő, hanem az is, hogy hogyan
-néznek ki a *rossz* kiérkezési idők. Mi történik akkor, ha közepesnél
-rosszabbul alakul a helyzet – mert ilyen is van, és vajon akkor
-*mennyire* szokott rosszul alakulni? Vagyis: mi a helyzet az eloszlás
-felső szélénél? Mert az remek, ha a medián idő mondjuk 12 perc, de
-gondoljunk bele, ez összesen annyit mond, hogy a betegek feléhez kiérnek
-12 percen belül – ami szuper hír, félreértés ne essék, de mi a helyzet a
-betegek másik 50%-ával? Hozzájuk 12,1 perc alatt érnek oda? Vagy 20 perc
-alatt? Vagy 20 óra alatt? A medián erről *semmit nem mond*!
+### A széli viselkedés mutatói
 
-A mentőellátás tipikusan az a terület, ahol a közepes értékek mellett
+Akármilyen középértékeket is használunk, egy közös problémájuk van: a
+kiérkezési időknél, pláne a magas prioritásoknál, életveszélyes
+helyzetekben, nem csak az fontos, hogy mi a *közepes* kiérkezési idő! Az
+is számít, hogy hogyan néznek ki a *rossz* kiérkezési idők. Mi történik
+akkor, ha közepesnél rosszabbul alakul a helyzet – mert ilyen is van, és
+vajon akkor *mennyire* szokott rosszul alakulni? Vagyis: mi a helyzet az
+eloszlás felső szélénél? Mert az remek, ha a medián idő mondjuk 12 perc,
+de gondoljunk bele, ez összesen annyit mond, hogy a betegek feléhez
+kiérnek 12 percen belül – ami fontos információ, félreértés ne essék, na
+de mi a helyzet a betegek másik 50%-ával? Hozzájuk 12,1 perc alatt érnek
+oda? Vagy 15 perc alatt? Vagy 20 perc alatt? Vagy 20 óra alatt? Erről
+*semmit nem mond* sem az átlag, sem a medián! Hangsúlyozom, hogy ez nem
+valamiféle hiba, nem is kell nekik semmit mondaniuk, hiszen az eloszlás
+közepét jellemzik, erre szolgálnak. Nem arról van tehát szó, hogy ezek
+nem jók – teljesen jók, csak ezek használata önmagában *kevés*. A
+mentőellátás tipikusan az a terület, ahol a közepes értékek mellett
 rendkívül fontos az eloszlás *szélét* is jellemezni; az kevés, ha
 tudjuk, hogy a közepes idő jó, ez nagyon tipikusan az a műfaj, ahol
 rosszabb forgatókönyvekre is méretezni kell – ebben a műfajban, pláne
 mondjuk egy újraélesztésnél, a rossz időknek is elfogadhatóan jónak kell
-lennie!
+lennie! Kell tehát mérőszám a széli viselkedés jellemzésére is.
 
 Itt érdemes egy pillanatra megállni a különféle standardok, elvárások
 kapcsán. Gyakran szokták emlegetni a „15 perces szabályt”, tehát, hogy a
@@ -228,40 +242,44 @@ világ egyetlen országában sem teljesül, hiszen *egyszer* bárhol
 előfordulhat valamilyen vis maior. Ezt tehát aligha lehet elvárni, és
 nem is lenne túl fair mutató, ha egymilliószor kiérünk egy perc alatt,
 egyszer pedig egy óra alatt, azt mondani jellemzésként, hogy „1 óra volt
-a maximális kiérkezési idő”. (A statisztikusok úgy mondanák: a maximum
+a maximális kiérkezési idő”. A statisztikusok úgy mondanák: a maximum
 nagyon érzékeny mutató, mert egyetlen érték is el tudja húzni, ezért nem
-jellemzi jól az eloszlás szélét.) Másik oldalról viszont a medián sem
-jó, mert noha nem érzékeny, de nem az eloszlás szélét jellemzi, ahogy
-arról az imént szó volt. Akkor mi a megoldás?
+jellemzi jól az eloszlás szélét. Másik oldalról viszont a medián sem jó,
+mert noha nem érzékeny, de nem az eloszlás szélét jellemzi, ahogy arról
+az imént szó volt. Akkor mit tegyünk?
 
-A legjobb mutató erre a célra a **percentilis**. A percentilisek a
-medián általánosításai, ezért megőrzik a robusztusságát, de már szélt is
-tudnak jellemezni, nem csak közepet. A medián az az időtartam, amin
-belül a betegek 50%-ához érnek ki, 50%-ához nem – a percentilis ezt
-általánosítja: ugyanez a mutató, csak nem 50%-kal. Hanem például
+Az egyik legjobb megoldást[^5] a felső percentilisek használata jelenti.
+Mi az, hogy **percentilis**? A percentilisek a medián általánosításai: a
+medián az az időtartam, amin belül a betegek 50%-ához érnek ki, 50%-ához
+nem – a percentilis ugyanez a mutató, csak nem 50%-kal. Hanem például
 75%-kal: a 75. percentilis az az időtartam, amin belül a betegek
-75%-ához kiérnek – tehát a betegek 25%-a ennél többet kénytelen várni.
+75%-ához kiérnek – tehát a betegek 25%-a kénytelen ennél többet várni.
 (A statisztikusok egyébként inkább a **kvantilis** kifejezést
 használják, és ezt 0,75-kvantilisnek hívják.) A mentőellátásban
 tipikusan a 90. percentilist használják: mennyi az az időtartam, amin
-belül az esetek 90%-ához kiérnek? (Azaz, a betegek 10%-a kénytelen ennél
-több várni.) Ez lesz a jó mutató: szemben a maximummal, robusztus, de
-szemben a mediánnal az eloszlás szélét jellemzi. A 90. percentilis jól
-jellemzi a rosszul alakuló helyzeteket is tekintve a teljesítményt!
+belül az esetek 90%-ához kiérnek? Azaz, aminél többet a betegek 10%-a
+kénytelen várni. A felső percentilis azért lesz jó mutató, mert megőrzi
+a medián azon tulajdonságát, hogy robusztus, viszont szemben a
+mediánnal, már az eloszlás szélét is tudja jellemezni, nem csak a
+közepét[^6]. A 90. percentilis jól jellemzi, hogy a rosszul alakuló
+kiérkezési idők mennyire alakulnak rosszul – és mint ilyen, fontos
+jellemzője egy mentőszolgálat teljesítményének.
 
-Ezt szokták tehát mérőszámként használni, és most már azt is
-elárulhatom, hogy például az angol mentőszolgálat is *erre* értelmezi a
-15 perces limitet! A 90. percentilis legyen 15 perc alatt, tehát az
-esetek legalább 90%-ához érjenek ki 15 perc alatt. Amint az az
-eljárásrendjük [megfelelő
+Ezt szokták tehát mérőszámként használni a középértékek mellett, és most
+már azt is elárulhatom, hogy például az angol mentőszolgálat is *erre*
+értelmezi a 15 perces limitet! A 90. percentilis legyen 15 perc alatt,
+tehát az esetek legalább 90%-ához érjenek ki legfeljebb 15 perc alatt.
+Amint az az eljárásrendjük [megfelelő
 pontjából](https://www.england.nhs.uk/statistics/wp-content/uploads/sites/2/2025/01/20250117-AmbSYS-specification.pdf#%5B%7B%22num%22%3A21%2C%22gen%22%3A0%7D%2C%7B%22name%22%3A%22XYZ%22%7D%2C69%2C570%2C0%5D)
-kiderül; most megint megjegyezhetném, hogy ilyet hol találunk a magyar
-mentőszolgálat honlapján…
+ki is derül; most megint megjegyezhetném, hogy ilyet hol találunk a
+magyar mentőszolgálat honlapján…
+
+## Problémafelvetés
 
 Ezen iszonyatosan hosszúra nyúlt bevezető után elérünk a
 problémafelvetéshez.
 
-Egy magyar blog ugyanis a minap
+Egy magyar blog 2025 februárjában
 [közölte](https://rontgen.444.hu/2025/02/10/bozotharc-aran-sikerult-megszerezni-az-orszagos-mentoszolgalat-kierkezesi-statisztikajat-a-szamoktol-nem-lesz-boldog-senki)
 az OMSZ kiérkezési statisztikáit. Jellemző adalék, hogy olyan adatokat,
 amiket mondjuk Angliában bárki letölthet, folyamatosan frissülően,
@@ -276,14 +294,15 @@ legyen felhasználható.) Hogy ennek vajon mi az oka, annak eldöntését az
 olvasóra bízom, a blog azonban szerencsére tudta digitalizálni ezeket az
 adatokat. Az adatközlés 2024 októberig tart.
 
-Van azonban a történetben egy csavar: az OMSZ csak az átlagot és mediánt
-adta meg. A fent tárgyalt, és mint láttuk, a mentőellátás minőségi
-vizsgálatában kritikusan fontos 90. percentilist nem közölték. A dolog
-azért érdekes, mert a blog ezt is explicite kérte, de annak ellenére sem
-adták ki, hogy az átlagot és a mediánt igen (tehát mind a nyers adatok,
-mind a számítási módszer biztosan az OMSZ rendelkezésére áll). Hogy mi
-ennek az oka, annak eldöntését ismét csak az olvasóra bízom, akárhogy
-is, mediánunk és átlagunk van, de 90. percentilisünk nincs.
+Van azonban a történetben egy csavar: az OMSZ még ilyen formában is csak
+az átlagot és mediánt adta meg. A fent tárgyalt, és mint láttuk, a
+mentőellátás minőségi vizsgálatában kritikusan fontos 90. percentilist
+nem közölték. A dolog azért érdekes, mert a blog ezt is explicite kérte,
+de annak ellenére sem adták ki, hogy az átlagot és a mediánt igen (tehát
+mind a nyers adatok, mind a számítási módszer biztosan az OMSZ
+rendelkezésére áll). Hogy mi ennek az oka, annak eldöntését ismét csak
+az olvasóra bízom, akárhogy is, mediánunk és átlagunk van, de 90.
+percentilisünk nincs.
 
 Tudunk ezzel valamit kezdeni? A legtisztább megoldás természetesen az
 lenne, ha egész egyszerűen az OMSZ közölné a 90. percentilist is (még
@@ -302,7 +321,7 @@ követ, ez az eloszláscsalád, ennek általában saját neve van, de ezen túl
 van egy vagy több ún. paramétere, amivel az általános kinézeten belül
 „finomhangolható”: kicsit eltolható balra-jobbra, összenyomható vagy
 széthúzható, ilyenekre kell gondolni. Példának okáért, van egy nevezetes
-eloszlás, a **lognormális eloszlás**, aminek kinézetét a következő ábra
+eloszlás, a lognormális eloszlás, aminek kinézetét a következő ábra
 mutatja néhány különböző paraméter mellett:
 
 <img src="README_files/figure-gfm/unnamed-chunk-2-1.png" width="100%" />
@@ -386,6 +405,8 @@ közlöm, a dolognak csak így van értelme. A prioritásokban eligzítást
 nyújt az OMSZ [egyik
 útmutatója](https://oktatas.mentok.hu/pluginfile.php/258749/mod_resource/content/1/Kerdezesi_protokoll_mentesiranyitok_reszere_v2.0_2023.12.19.pdf).
 
+### Kiemelt P1 prioritás
+
 A talán legfontosabb a **Kiemelt P1** kategória; ez a legmagasabb
 prioritású kategória, ahol a beteg közvetlen életveszélyben van,
 azonnali beavatkozást igényel, és még ezen belül is legmagasabb
@@ -397,7 +418,10 @@ megközelítéseket mutatják, ahogy fent is szerepelt):
 
 Az utóbbi időben országosan 19-23 perc körül, Budapesten 17-25 perc
 körül alakult a becsült 90. percentilis a Kiemelt P1 prioritási
-kategóriában.
+kategóriában (függően a konkrét hónaptól és az alkalmazott becslési
+módszertől).
+
+### P1 prioritás
 
 A következő, **P1** prioritású kategória továbbra is az azonnali
 beavatkozást igénylő életveszély, a korábban említett legmagasabb
@@ -409,7 +433,10 @@ percentilis:
 <img src="README_files/figure-gfm/unnamed-chunk-4-1.png" width="100%" />
 
 Az utóbbi időben országosan 22-27 perc körül, Budapesten 25-30 perc
-körül alakult a becsült 90. percentilis a P1 prioritási kategóriában.
+körül alakult a becsült 90. percentilis a P1 prioritási kategóriában
+(függően a konkrét hónaptól és az alkalmazott becslési módszertől).
+
+### P2 prioritás
 
 Végül még ábrázolom a **P2** prioritási kategóriát; ide tartoznak a
 potenciálisan életveszélyes, gyors beavatkozást igénylő állapotok (pl.
@@ -420,11 +447,14 @@ percentilis:
 <img src="README_files/figure-gfm/unnamed-chunk-5-1.png" width="100%" />
 
 Az utóbbi időben országosan 40-45 perc körül, Budapesten 60-70 perc
-körül alakult a becsült 90. percentilis a P2 prioritási kategóriában.
+körül alakult a becsült 90. percentilis a P2 prioritási kategóriában
+(függően a konkrét hónaptól és az alkalmazott becslési módszertől).
 
-Zárásként megjegyzem, hogy a fenti eredményeimet közlő egyik internetes
-portál hosszas levelezésbe kezdett az OMSZ-szal. E levélváltás
-statisztikai relevanciája ugyan csekély, mégis melegen ajánlom [az
+### Záró megjegyzés
+
+A fenti eredményeimet közlő egyik internetes portál hosszas levelezésbe
+kezdett az OMSZ-szal. E levélváltás statisztikai relevanciája ugyan
+csekély, mégis melegen ajánlom [az
 elolvasását](https://telex.hu/belfold/2025/02/18/orszagos-mentoszolgalat-omsz-mentok-kierkezesi-idok-kunetz-zsombor-ferenci-tamas-gyorfi-pal-levelezes-transzparencia-adatok),
 mert *nagyon* tanulságos.
 
@@ -997,3 +1027,78 @@ Research Part C: Emerging Technologies* 65: 97–110.
 </div>
 
 </div>
+
+[^1]: Ezzel mondjuk nyitva hagytam azt a kérdést, hogy rendben, de mégis
+    mi az, fogalmi szinten, hogy „közepes” kiérkezési idő? Még a
+    statisztika könyvek is gyakran inkább verbális körülírásokkal élnek
+    precíz definíció helyett, „tipikus érték”, „jellemző érték”, „ami
+    körül szóródnak az értékek”, ilyesmiket szoktak mondani. Valójában
+    ezen megfogalmazások mindegyike megkérdőjelezhető, úgyhogy bár jó,
+    ha az embernek van egy intuitív képe arról, hogy mi az, hogy
+    „közepes” érték, de végső soron a precíz tartalomhoz egész
+    egyszerűen ismerni kell a mutató definícióját. Azt szoktam mondani,
+    hogy a közepes érték az, amit a középérték-mutató mér…
+
+[^2]: Egyébként pontosan ugyanez a helyzet a jövedelmekkel, azok
+    eloszlása is ferde, ezért van az, hogy az átlag-jövedelem sem
+    feltétlenül szerencsés mutató önmagában. Nem tudom megállni, hogy e
+    ponton ne idézzem a legjobb magyar nyelvű [biostatisztika
+    könyv](http://biostatkonyv.hu/) példáját: a magyar lakosság 99%-ának
+    az átlagosnál több lába van! És tényleg, gondoljuk végig: 1 vagy 0
+    lába néhányaknak sajnos van – erről történetesen [pont én
+    is](https://hunvascdata.hu/) bőven tudnék adatokat mondani –, 3 vagy
+    több azonban nem igazán, így a magyar lakosság átlagos lábszáma
+    1,99. Tehát a lakosság 99%-ának valóban az átlagosnál több lába van!
+    Ez ugyanaz, ferde eloszlás, csak, ahogy a statisztikusok mondják,
+    egy diszkrét eloszlással.
+
+[^3]: Ezt jobban lehet szemléltetni az adathiba példájával. Mondjuk,
+    hogy fogunk egy 80 perces kiérkezést és lecseréljük 80 évre, akkor
+    az átlag teljesen értelmetlenné válik – miközben csak egyetlen
+    értéket módosítottunk! Hiába teljesen jó az adatbázis 99,9%-a adott
+    esetben, egyetlen egy hiba elég ahhoz, hogy az átlagot értelmetlenné
+    tegye. Vegyük észre, hogy a medián viszont *meg sem moccan*, még
+    ebben a teljesen extrém esetben sem!
+
+[^4]: Az átlag valamennyi megfigyelésnek felhasználja a konkrét értékét
+    is, a medián csak a helyzetét, tehát, hogy hol vannak a sorrendben,
+    de a számértéknek nincs jelentősége. Ez egyszerre előny és hátrány:
+    épp emiatt áll fenn az előbb említett robusztusság, de ez egyúttal
+    azt is jelenti, hogy a medián „kevesebb információt szed ki a
+    mintából”. Ez így kicsit homályos megfogalmazás, de a [következtető
+    statisztikában](https://ferenci-tamas.github.io/biostatisztika/induktiv.html#sec-becsleselmelet)
+    pontos értelmet nyer: a medián kevésbé hatásos becslő, mint az
+    átlag.
+
+[^5]: Felmerülhet még az ún. extrémérték-elmélet alkalmazása. Ez nem
+    egyszerűen az eloszlás széle felé lévő, nagyobb értékek
+    modellezésével foglalkozik, hanem *konkrétan* a legnagyobbal. Ez
+    azonban az esetünkben nem túl releváns. Igen, sajnálatos az az egy
+    szem peches ember, akinek a legtöbbet kellett várnia, és igyekezni
+    kell ezt is javítani, de ha 10 ezerből 1-nek kellett sokat várnia,
+    az összességében azért valószínűleg nem népegészségügyi jelentőségű
+    – feltéve ha a maradék 9999 jóval kevesebbet várt. Ez szemben áll
+    például egy gát méretezésének a kérdésével: ott igenis elképesztően
+    fontos lehet az is, ha 10 ezerből csak egyetlen egyszer magasabb a
+    vízszint mint a gát magassága, hiszen az azt jelenti, hogy akkor a
+    várost elönti az ár… (És nem feltétlenül nagy vigasz, hogy 9999-szer
+    mennyivel kényelmesen magasabb volt a gát, mint a vízszint.) Az
+    extrémérték-elméletnek az ilyen és hasonló szituációk jelentik a fő
+    alkalmazási területeit.
+
+[^6]: Ilyen szempontból persze még jobb lenne a 95., a 99., a 99,9. stb.
+    percentilis használata, hiszen azok egyre jobban *tényleg* a
+    legszélét jelzik az eloszlásnak. A probléma az, hogy egyre romlik a
+    becsülhetőségük: gondoljunk bele, a 99. percentilis 100 adatból a
+    sorban 99. – de mi van akkor, ha mondjuk összesen csak 50
+    megfigyelésünk van? Egész pontosan az fog történni, hogy minél
+    nagyobb percentilist nézünk, annál bizonytalanabb, annál nagyobb
+    ingadozású lesz a becslése. De ez egyáltalán nem meglepő, ha arra
+    gondolunk, hogy az egyre nagyobb percentilissel egyre közelebb
+    kerülünk a maximumhoz – amiről már kezdetben megmondtuk, hogy nagyon
+    ingadozó! (Voltaképp a maximum nem más, mint a 100. percentilis.)
+    Ilyen értelemben a 90. percentilis választása egyfajta
+    kompromisszum: már eléggé az eloszlás szélét jellemzi, de azért még
+    nem nagyon rossz a becsülhetősége. Egyfajta „jól becsülhető
+    majdnem-maximum”. Nem szó szerint maximum, a legszél, ebből kicsit
+    engedünk, de cserében sokkal stabilabban becsülhető.
