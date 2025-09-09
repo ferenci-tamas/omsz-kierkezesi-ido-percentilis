@@ -89,10 +89,9 @@ Ferenci Tamás (<https://www.medstat.hu/>)<br>
   ha egyszer az eloszlásunk megvan, akkor abból ugyanúgy kiszámíthatjuk
   ezt is, ahogy a 90. percentilist. Az utolsó közölt időpontokban a
   becslésem szerint a 15 percen belüli kiérkezés aránya a Kiemelt P1
-  kategóriában országosan 70-80% körül, Budapesten 65-80% körül alakult,
-  a P1 kategóriában pedig országosan 60-70%, Budapesten 55-60% körül
-  alakult (függően a konkrét hónaptól és az alkalmazott becslési
-  módszertől).
+  kategóriában országosan 70-80% körül, Budapesten 65-80% körül, a P1
+  kategóriában pedig országosan 60-70%, Budapesten 55-60% körül alakult
+  (függően a konkrét hónaptól és az alkalmazott becslési módszertől).
 - Újra hangsúlyozom, hogy a fentiek becslések, de szerencsére nincsen
   semmi gond, mert ha a becslésem rossz lenne, akkor ezt a kérdést az
   OMSZ egy pillanat alatt tisztázhatja azzal, hogy közli a tényadatokat.
@@ -150,7 +149,7 @@ Ha már egyszer definiálva van az óra elindítása és megállítása, és
 innentől ne törődjünk azzal, hogy hogyan, akkor a kettőből megkapjuk a
 kiérkezési időt. A következő kérdés az, hogy ezt hogyan jellemezzük.
 
-A probléma magva az, hogy ez nem egyetlen szám: lesz aki a mentőállomás
+A probléma magva, hogy ez nem egyetlen szám: lesz, aki a mentőállomás
 előtt esik össze és 3 perc alatt ott vannak, lesz, aki a világ végén,
 pont hóviharban és két óra alatt. (Fontos, hogy most arról beszélek, ha
 leszűkítjük magunkat egy adott prioritásra, tehát nem arról van szó,
@@ -206,7 +205,7 @@ ennél! Sokan vitatkoznának, hogy mennyire „közepes” ez a kiérkezési id�
 ha egyszer az esetek majdnem kétharmadában jobb a helyzet[^2]! Fontos
 hangsúlyozni, hogy nem arról van szó, hogy „elromlott” az átlag, az
 átlag tényleg ennyi (ezen belül is különösen: valóban ilyen nagy érték
-kell, hogy kijöjjön az az összeg, amiben – a ferdeség miatt – nagy
+kell ahhoz, hogy kijöjjön az az összeg, amiben – a ferdeség miatt – nagy
 pozitív értékek vannak, de nagy negatív értékek nincsenek), egyszerűen
 arról van szó, hogy az a fajta közepesség, amit az átlag definíciója
 kiad, nem feltétlenül esik egybe a hétköznapi érzésünkkel arról, hogy mi
@@ -234,7 +233,7 @@ Akármilyen középértékeket is használunk, egy közös problémájuk van: a
 kiérkezési időknél, pláne a magas prioritásoknál, életveszélyes
 helyzetekben, nem csak az fontos, hogy mi a *közepes* kiérkezési idő! Az
 is számít, hogy hogyan néznek ki a *rossz* kiérkezési idők. Mi történik
-akkor, ha közepesnél rosszabbul alakul a helyzet – mert ilyen is van, és
+akkor, ha közepesnél rosszabbul alakul a helyzet – mert ilyen is van,
 vajon akkor *mennyire* szokott rosszul alakulni? Vagyis: mi a helyzet az
 eloszlás felső szélénél? Mert az remek, ha a medián idő mondjuk 12 perc,
 de gondoljunk bele, ez összesen annyit mond, hogy a betegek feléhez
@@ -1133,12 +1132,12 @@ Research Part C: Emerging Technologies* 65: 97–110.
     ha az embernek van egy intuitív képe arról, hogy mi az, hogy
     „közepes” érték, de végső soron a precíz tartalomhoz egész
     egyszerűen ismerni kell a mutató definícióját. Azt szoktam mondani,
-    hogy a közepes érték az, amit a középérték-mutató mér…
+    hogy a közepes érték az, amit a középérték-mutató mutat…
 
 [^2]: Egyébként pontosan ugyanez a helyzet a jövedelmekkel, azok
     eloszlása is ferde, ezért van az, hogy az átlag-jövedelem sem
     feltétlenül szerencsés mutató önmagában. Nem tudom megállni, hogy e
-    ponton ne idézzem a legjobb magyar nyelvű [biostatisztika
+    ponton ne idézzem az egyik legjobb magyar nyelvű [biostatisztika
     könyv](http://biostatkonyv.hu/) példáját: a magyar lakosság 99%-ának
     az átlagosnál több lába van! És tényleg, gondoljuk végig: 1 vagy 0
     lába néhányaknak sajnos van – erről történetesen [pont én
@@ -1150,18 +1149,18 @@ Research Part C: Emerging Technologies* 65: 97–110.
 
 [^3]: Ezt jobban lehet szemléltetni az adathiba példájával. Mondjuk,
     hogy fogunk egy 80 perces kiérkezést és lecseréljük 80 évre, akkor
-    az átlag teljesen értelmetlenné válik – miközben csak egyetlen
+    az átlag teljesen értelmetlenné válik – miközben csak egyetlen egy
     értéket módosítottunk! Hiába teljesen jó az adatbázis 99,9%-a adott
     esetben, egyetlen egy hiba elég ahhoz, hogy az átlagot értelmetlenné
     tegye. Vegyük észre, hogy a medián viszont *meg sem moccan*, még
     ebben a teljesen extrém esetben sem!
 
 [^4]: Az átlag valamennyi megfigyelésnek felhasználja a konkrét értékét
-    is, a medián csak a helyzetét, tehát, hogy hol vannak a sorrendben,
-    de a számértéknek nincs jelentősége. Ez egyszerre előny és hátrány:
-    épp emiatt áll fenn az előbb említett robusztusság, de ez egyúttal
-    azt is jelenti, hogy a medián „kevesebb információt szed ki a
-    mintából”. Ez így kicsit homályos megfogalmazás, de a [következtető
+    is, a medián csak a helyzetét, tehát, hogy hol van a sorrendben, de
+    a számértéknek nincs jelentősége. Ez egyszerre előny és hátrány: épp
+    emiatt áll fenn az előbb említett robusztusság, de ez egyúttal azt
+    is jelenti, hogy a medián „kevesebb információt szed ki” a mintából.
+    Ez így kicsit homályos megfogalmazás, de a [következtető
     statisztikában](https://ferenci-tamas.github.io/biostatisztika/induktiv.html#sec-becsleselmelet)
     pontos értelmet nyer: a medián kevésbé hatásos becslő, mint az
     átlag.
