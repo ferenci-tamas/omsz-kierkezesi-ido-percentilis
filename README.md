@@ -1,8 +1,8 @@
 Az Országos Mentőszolgálat kiérkezési statisztikáinak vizsgálata: a 90.
-percentilis becslése
+percentilis és a 15 percen belüli kiérkezési arány becslése
 ================
 Ferenci Tamás (<https://www.medstat.hu/>)<br>
-2025. szeptember 9.
+2025. szeptember 10.
 
 - [Összefoglaló](#összefoglaló)
 - [Bevezetés](#bevezetés)
@@ -37,16 +37,26 @@ Ferenci Tamás (<https://www.medstat.hu/>)<br>
   átküldik… (Tehát az OMSZ *plusz munkát* fektetett abba, hogy az
   eredmény *kevésbé* legyen felhasználható.) Hogy ennek vajon mi az oka,
   annak eldöntését az olvasóra bízom, a blog azonban szerencsére tudta
-  digitalizálni ezeket az adatokat. Az adatközlés 2024 októberig tart.
-- Van azonban a történetben egy csavar: az OMSZ csak az átlagot és
-  mediánt (tehát azt az időt, amin belül az esetek feléhez érnek ki)
-  adta meg. A mentőellátás minőségi vizsgálatában tipikus 90.
-  percentilist (tehát azt az időt, amin belül az esetek 90%-ához
+  digitalizálni ezeket az adatokat. Az adatközlés 2024. októberig tart.
+- Van azonban a történetben egy csavar: az OMSZ még az említett formában
+  is csak az átlagot és mediánt (tehát azt az időt, amin belül az esetek
+  feléhez érnek ki) adta meg. A mentőellátás minőségi vizsgálatában
+  tipikus 90. percentilist (azt az időt, amin belül az esetek 90%-ához
   kiérnek) nem közölte. A dolog azért érdekes, mert a blog ezt is
   explicite kérte, de annak ellenére sem adták ki, hogy az átlagot és a
   mediánt igen (tehát mind a nyers adatok, mind a számítási módszer
   biztosan az OMSZ rendelkezésére áll). Hogy mi ennek az oka, annak
   eldöntését ismét csak az olvasóra bízom.
+- A kérdés fontos, mert az átlag és a medián egyaránt a *közepes*
+  kiérkezési időt jellemzi. Ez természetesen nagyon lényeges információ,
+  de önmagában kevés: egy 10 perces medián azt jelenti, hogy az esetek
+  feléhez kiérnek 10 perc alatt, ami fontos, de ettől még ebből semmit
+  nem tudunk meg a másik feléről – ahhoz 11 perc vagy 11 óra alatt érnek
+  ki? A 90. percentilis pont ezért jó mutató, mert arról nyilatkozik,
+  hogy ha közepesnél rosszabbul alakul a helyzet, akkor *mennyire*
+  alakul rosszul. A mentőellátás tipikusan az a terület, ahol ez is
+  kritikus: nem elég, ha átlagosan jók vagyunk, az is fontos, hogy a
+  rossz teljesítmény se legyen túl rossz.
 - A dolog azonban így egy érdekes statisztikai probléma lett, *ha*
   ugyanis ismerjük a kiérkezési idők eloszlását, *és* az olyan eloszlás,
   amit az átlaga és a mediánja meghatároz, akkor ebből a két értékből ki
@@ -61,20 +71,31 @@ Ferenci Tamás (<https://www.medstat.hu/>)<br>
 - A legmagasabb, Kiemelt P1 prioritási kategóriában (pl. újraélesztés)
   az utolsó közölt időpontokban a 90. percentilis becslésem szerint
   országosan 19-23 perc körül van, Budapesten némileg rosszabb, 17-25
-  perc körül is lehet. Tehát ennyi idő alatt érnek ki az esetek 90%-hoz,
-  vagyis a betegek 10%-a ennél is többet kénytelen várni a Kiemelt P1
-  kategóriában. P1-nél (közvetlenül életveszélyes, azonnali beavatkozást
-  igénylő állapotok, pl. többszörös traumás sérülés, zajló görcsroham,
-  végtagamputáció, súlyos égés, a legmagasabb időfaktorú esetek
-  kivételével) a becsült 90. percentilis országosan 22-27 perc körüli,
-  Budapesten 25-30 perc körüli. Végül P2 kategóriában (potenciálisan
-  életveszélyes, gyors beavatkozást igénylő állapotok, pl. légúti
-  idegentest nehézlégzés nélkül, közepesfokú égés, vérhányás, hirtelen
-  látás- vagy hallásvesztés) a becsült 90. percentilis országosan 40-45
-  perc körüli, Budapesten 60-70 perc körüli.
-- Újra hangsúlyozom, hogy ez egy becslés, de szerencsére nincsen semmi
-  gond, mert ha a becslésem rossz lenne, akkor ezt a kérdést az OMSZ egy
-  pillanat alatt tisztázhatja azzal, hogy közli a tényadatokat.
+  perc körül is lehet (függően a konkrét hónaptól és az alkalmazott
+  becslési módszertől). Tehát ennyi idő alatt érnek ki az esetek
+  90%-hoz, vagyis a betegek 10%-a ennél is többet kénytelen várni a
+  Kiemelt P1 kategóriában. P1-nél (közvetlenül életveszélyes, azonnali
+  beavatkozást igénylő állapotok, pl. többszörös traumás sérülés, zajló
+  görcsroham, végtagamputáció, súlyos égés, a legmagasabb időfaktorú
+  esetek kivételével) a becsült 90. percentilis országosan 22-27 perc
+  körüli, Budapesten 25-30 perc körüli. Végül P2 kategóriában
+  (potenciálisan életveszélyes, gyors beavatkozást igénylő állapotok,
+  pl. légúti idegentest nehézlégzés nélkül, közepesfokú égés, vérhányás,
+  hirtelen látás- vagy hallásvesztés) a becsült 90. percentilis
+  országosan 40-45 perc körüli, Budapesten 60-70 perc körüli.
+- Egy másik gyakori megközelítés, hogy azt nézzük, hogy hány százalékban
+  érnek ki adott időn, például 15 percen belül. Nyilvánosan közölt,
+  folyamatosan frissülő tényadatunk ugyan erről sincs Magyarországon, de
+  ha egyszer az eloszlásunk megvan, akkor abból ugyanúgy kiszámíthatjuk
+  ezt is, ahogy a 90. percentilist. Az utolsó közölt időpontokban a
+  becslésem szerint a 15 percen belüli kiérkezés aránya a Kiemelt P1
+  kategóriában országosan 70-80% körül, Budapesten 65-80% körül alakult,
+  a P1 kategóriában pedig országosan 60-70%, Budapesten 55-60% körül
+  alakult (függően a konkrét hónaptól és az alkalmazott becslési
+  módszertől).
+- Újra hangsúlyozom, hogy a fentiek becslések, de szerencsére nincsen
+  semmi gond, mert ha a becslésem rossz lenne, akkor ezt a kérdést az
+  OMSZ egy pillanat alatt tisztázhatja azzal, hogy közli a tényadatokat.
 - A fenti eredményeimet közlő egyik internetes portál hosszas
   levelezésbe kezdett az OMSZ-szal. E levélváltás statisztikai
   relevanciája ugyan csekély, mégis melegen ajánlom [az
