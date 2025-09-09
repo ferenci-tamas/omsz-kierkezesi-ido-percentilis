@@ -1,5 +1,5 @@
 ---
-title: "Az Országos Mentőszolgálat kiérkezési statisztikáinak vizsgálata: a 90. percentilis becslése"
+title: "Az Országos Mentőszolgálat kiérkezési statisztikáinak vizsgálata: a 90. percentilis és a 15 percen belüli kiérkezési arány becslése"
 author: Ferenci Tamás (https://www.medstat.hu/)<br>
 date: "`r gsub('  ', ' ', format(Sys.time(), '%Y. %B %e.'))`"
 lang: hu-HU
@@ -23,12 +23,14 @@ set.seed(1)
 
 ## Összefoglaló
 
-- 2025 februárjában egy blog [közölte](https://rontgen.444.hu/2025/02/10/bozotharc-aran-sikerult-megszerezni-az-orszagos-mentoszolgalat-kierkezesi-statisztikajat-a-szamoktol-nem-lesz-boldog-senki) az Országos Mentőszolgálat (OMSZ) kiérkezési időkre vonatkozó statisztikáit. Jellemző, hogy olyan adatokat, amiket mondjuk Angliában bárki letölthet, folyamatosan frissülően, magyarázatokkal ellátva a mentőszolgálat [saját honlapjáról](https://www.england.nhs.uk/statistics/statistical-work-areas/ambulance-quality-indicators/), azt Magyarországon egy blognak (!) kell, adatkéréssel megszereznie, majd ha sikerül, akkor a mentőszolgálat úgy adja oda a táblázatot, hogy kinyomtatják, majd rossz minőségben beszkennelik és *képként* átküldik... (Tehát az OMSZ *plusz munkát* fektetett abba, hogy az eredmény *kevésbé* legyen felhasználható.) Hogy ennek vajon mi az oka, annak eldöntését az olvasóra bízom, a blog azonban szerencsére tudta digitalizálni ezeket az adatokat. Az adatközlés 2024 októberig tart.
-- Van azonban a történetben egy csavar: az OMSZ csak az átlagot és mediánt (tehát azt az időt, amin belül az esetek feléhez érnek ki) adta meg. A mentőellátás minőségi vizsgálatában tipikus 90. percentilist (tehát azt az időt, amin belül az esetek 90%-ához kiérnek) nem közölte. A dolog azért érdekes, mert a blog ezt is explicite kérte, de annak ellenére sem adták ki, hogy az átlagot és a mediánt igen (tehát mind a nyers adatok, mind a számítási módszer biztosan az OMSZ rendelkezésére áll). Hogy mi ennek az oka, annak eldöntését ismét csak az olvasóra bízom.
+- 2025 februárjában egy blog [közölte](https://rontgen.444.hu/2025/02/10/bozotharc-aran-sikerult-megszerezni-az-orszagos-mentoszolgalat-kierkezesi-statisztikajat-a-szamoktol-nem-lesz-boldog-senki) az Országos Mentőszolgálat (OMSZ) kiérkezési időkre vonatkozó statisztikáit. Jellemző, hogy olyan adatokat, amiket mondjuk Angliában bárki letölthet, folyamatosan frissülően, magyarázatokkal ellátva a mentőszolgálat [saját honlapjáról](https://www.england.nhs.uk/statistics/statistical-work-areas/ambulance-quality-indicators/), azt Magyarországon egy blognak (!) kell, adatkéréssel megszereznie, majd ha sikerül, akkor a mentőszolgálat úgy adja oda a táblázatot, hogy kinyomtatják, majd rossz minőségben beszkennelik és *képként* átküldik... (Tehát az OMSZ *plusz munkát* fektetett abba, hogy az eredmény *kevésbé* legyen felhasználható.) Hogy ennek vajon mi az oka, annak eldöntését az olvasóra bízom, a blog azonban szerencsére tudta digitalizálni ezeket az adatokat. Az adatközlés 2024. októberig tart.
+- Van azonban a történetben egy csavar: az OMSZ még az említett formában is csak az átlagot és mediánt (tehát azt az időt, amin belül az esetek feléhez érnek ki) adta meg. A mentőellátás minőségi vizsgálatában tipikus 90. percentilist (azt az időt, amin belül az esetek 90%-ához kiérnek) nem közölte. A dolog azért érdekes, mert a blog ezt is explicite kérte, de annak ellenére sem adták ki, hogy az átlagot és a mediánt igen (tehát mind a nyers adatok, mind a számítási módszer biztosan az OMSZ rendelkezésére áll). Hogy mi ennek az oka, annak eldöntését ismét csak az olvasóra bízom.
+- A kérdés fontos, mert az átlag és a medián egyaránt a *közepes* kiérkezési időt jellemzi. Ez természetesen nagyon lényeges információ, de önmagában kevés: egy 10 perces medián azt jelenti, hogy az esetek feléhez kiérnek 10 perc alatt, ami fontos, de ettől még ebből semmit nem tudunk meg a másik feléről -- ahhoz 11 perc vagy 11 óra alatt érnek ki? A 90. percentilis pont ezért jó mutató, mert arról nyilatkozik, hogy ha közepesnél rosszabbul alakul a helyzet, akkor *mennyire* alakul rosszul. A mentőellátás tipikusan az a terület, ahol ez is kritikus: nem elég, ha átlagosan jók vagyunk, az is fontos, hogy a rossz teljesítmény se legyen túl rossz.
 - A dolog azonban így egy érdekes statisztikai probléma lett, *ha* ugyanis ismerjük a kiérkezési idők eloszlását, *és* az olyan eloszlás, amit az átlaga és a mediánja meghatároz, akkor ebből a két értékből ki tudjuk számolni a nem közölt 90. percentilist is! Azt persze nem tudhatjuk, hogy ez Magyarországon milyen eloszlás, de irodalmi adatok és statisztikai megfontolások alapján tehetünk észszerű feltevéseket.
 - Írásomban bemutatom e kérdés hátterét, kitérve mind a használt mutatószámokra, mind az előbb említett statisztikai módszerre. Ezután végigszámolom ezt, a robusztusság kedvéért többféle eloszlással is, és közlöm az eredményeket. A transzparencia és a nyílt tudomány jegyében minden számítást nyilvánosságra hozok.
-- A legmagasabb, Kiemelt P1 prioritási kategóriában (pl. újraélesztés) az utolsó közölt időpontokban a 90. percentilis becslésem szerint országosan 19-23 perc körül van, Budapesten némileg rosszabb, 17-25 perc körül is lehet. Tehát ennyi idő alatt érnek ki az esetek 90%-hoz, vagyis a betegek 10%-a ennél is többet kénytelen várni a Kiemelt P1 kategóriában. P1-nél (közvetlenül életveszélyes, azonnali beavatkozást igénylő állapotok, pl. többszörös traumás sérülés, zajló görcsroham, végtagamputáció, súlyos égés, a legmagasabb időfaktorú esetek kivételével) a becsült 90. percentilis országosan 22-27 perc körüli, Budapesten 25-30 perc körüli. Végül P2 kategóriában (potenciálisan életveszélyes, gyors beavatkozást igénylő állapotok, pl. légúti idegentest nehézlégzés nélkül, közepesfokú égés, vérhányás, hirtelen látás- vagy hallásvesztés) a becsült 90. percentilis országosan 40-45 perc körüli, Budapesten 60-70 perc körüli.
-- Újra hangsúlyozom, hogy ez egy becslés, de szerencsére nincsen semmi gond, mert ha a becslésem rossz lenne, akkor ezt a kérdést az OMSZ egy pillanat alatt tisztázhatja azzal, hogy közli a tényadatokat.
+- A legmagasabb, Kiemelt P1 prioritási kategóriában (pl. újraélesztés) az utolsó közölt időpontokban a 90. percentilis becslésem szerint országosan 19-23 perc körül van, Budapesten némileg rosszabb, 17-25 perc körül is lehet (függően a konkrét hónaptól és az alkalmazott becslési módszertől). Tehát ennyi idő alatt érnek ki az esetek 90%-hoz, vagyis a betegek 10%-a ennél is többet kénytelen várni a Kiemelt P1 kategóriában. P1-nél (közvetlenül életveszélyes, azonnali beavatkozást igénylő állapotok, pl. többszörös traumás sérülés, zajló görcsroham, végtagamputáció, súlyos égés, a legmagasabb időfaktorú esetek kivételével) a becsült 90. percentilis országosan 22-27 perc körüli, Budapesten 25-30 perc körüli. Végül P2 kategóriában (potenciálisan életveszélyes, gyors beavatkozást igénylő állapotok, pl. légúti idegentest nehézlégzés nélkül, közepesfokú égés, vérhányás, hirtelen látás- vagy hallásvesztés) a becsült 90. percentilis országosan 40-45 perc körüli, Budapesten 60-70 perc körüli.
+- Egy másik gyakori megközelítés, hogy azt nézzük, hogy hány százalékban érnek ki adott időn, például 15 percen belül. Nyilvánosan közölt, folyamatosan frissülő tényadatunk ugyan erről sincs Magyarországon, de ha egyszer az eloszlásunk megvan, akkor abból ugyanúgy kiszámíthatjuk ezt is, ahogy a 90. percentilist. Az utolsó közölt időpontokban a becslésem szerint a 15 percen belüli kiérkezés aránya a Kiemelt P1 kategóriában országosan 70-80% körül, Budapesten 65-80% körül alakult, a P1 kategóriában pedig országosan 60-70%, Budapesten 55-60% körül alakult (függően a konkrét hónaptól és az alkalmazott becslési módszertől).
+- Újra hangsúlyozom, hogy a fentiek becslések, de szerencsére nincsen semmi gond, mert ha a becslésem rossz lenne, akkor ezt a kérdést az OMSZ egy pillanat alatt tisztázhatja azzal, hogy közli a tényadatokat.
 - A fenti eredményeimet közlő egyik internetes portál hosszas levelezésbe kezdett az OMSZ-szal. E levélváltás statisztikai relevanciája ugyan csekély, mégis melegen ajánlom [az elolvasását](https://telex.hu/belfold/2025/02/18/orszagos-mentoszolgalat-omsz-mentok-kierkezesi-idok-kunetz-zsombor-ferenci-tamas-gyorfi-pal-levelezes-transzparencia-adatok), mert *nagyon* tanulságos.
 
 ## Bevezetés
@@ -121,50 +123,116 @@ Itt néhány egyszerű vizualizációt közlök a kapott eredmények szemléltet
 A talán legfontosabb a **Kiemelt P1** kategória; ez a legmagasabb prioritású kategória, ahol a beteg közvetlen életveszélyben van, azonnali beavatkozást igényel, és még ezen belül is legmagasabb időfaktorú a kórkép (tipikusan: újraélesztés). Itt így alakult a becsült 90. percentilis (a különböző színek a különböző becslési megközelítéseket mutatják, ahogy fent is szerepelt):
 
 ```{r, echo = FALSE}
-ggplot(RawDataProc[CATEGORY == "Kiemelt P1" & variable != "P90"],
-       aes(x = DATE, y = value, group = varname, color = varname)) +
+ggplot(
+  RawDataProc[CATEGORY == "Kiemelt P1" & type == "time" &
+                variable != "P90"],
+  aes(x = DATE, y = value, group = varname, color = varname)) +
   scale_y_continuous(breaks = seq(0, 200, 5)) +
   facet_wrap(~GEO) + geom_line() +
   labs(x = "", y = "Kiérkezési idő [perc]", color = "",
        title = "OMSZ kiérkezési idők, Kiemelt P1 prioritás",
        caption = "Ferenci Tamás, https://www.medstat.hu/") +
-  theme(legend.position = "bottom")
+  theme(legend.position = "bottom") +
+  guides(color = guide_legend(ncol = 3))
 ```
 
-Az utóbbi időben országosan 19-23 perc körül, Budapesten 17-25 perc körül alakult a becsült 90. percentilis a Kiemelt P1 prioritási kategóriában (függően a konkrét hónaptól és az alkalmazott becslési módszertől).
+A vizsgált időszak vége felé országosan 19-23 perc körül, Budapesten 17-25 perc körül alakult a becsült 90. percentilis a Kiemelt P1 prioritási kategóriában (függően a konkrét hónaptól és az alkalmazott becslési módszertől).
+
+A becsült 15 percen belüli kiérkezési arány:
+
+```{r, echo = FALSE}
+ggplot(
+  RawDataProc[CATEGORY == "Kiemelt P1" & type == "percentage" &
+                variable != "CDF15"],
+  aes(x = DATE, y = value, group = varname, color = varname)) +
+  scale_y_continuous(labels = scales::percent) +
+  facet_wrap(~GEO) + geom_line() +
+  labs(x = "", y = "15 percen belüli kiérkezési arány [%]",
+       color = "",
+       title = "OMSZ kiérkezési idők, Kiemelt P1 prioritás",
+       caption = "Ferenci Tamás, https://www.medstat.hu/") +
+  theme(legend.position = "bottom") +
+  guides(color = guide_legend(ncol = 2))
+```
+
+A vizsgált időszak vége felé országosan 70-80% körül, Budapesten 65-80% körül alakult a becsült 15 percen belüli kiérkezési arány a Kiemelt P1 prioritási kategóriában (függően a konkrét hónaptól és az alkalmazott becslési módszertől).
 
 ### P1 prioritás
 
 A következő, **P1** prioritású kategória továbbra is az azonnali beavatkozást igénylő életveszély, a korábban említett legmagasabb időfaktorú kórképek nélkül (olyanok tartoznak ide, mint a többszörös trauma, zajló görcsroham, végtagamputáció, súlyos égés, a legmagasabb időfaktorú esetek kivételével). Itt így alakult a becsült 90. percentilis:
 
 ```{r, echo = FALSE}
-ggplot(RawDataProc[CATEGORY == "P1" & variable != "P90"],
-       aes(x = DATE, y = value, group = varname, color = varname)) +
+ggplot(
+  RawDataProc[CATEGORY == "P1" & type == "time" &
+                variable != "P90"],
+  aes(x = DATE, y = value, group = varname, color = varname)) +
   facet_wrap(~GEO) + geom_line() +
   labs(x = "", y = "Kiérkezési idő [perc]", color = "",
        title = "OMSZ kiérkezési idők, P1 prioritás",
        caption = "Ferenci Tamás, https://www.medstat.hu/") +
-  theme(legend.position = "bottom")
+  theme(legend.position = "bottom") +
+  guides(color = guide_legend(ncol = 3))
 ```
 
-Az utóbbi időben országosan 22-27 perc körül, Budapesten 25-30 perc körül alakult a becsült 90. percentilis a P1 prioritási kategóriában (függően a konkrét hónaptól és az alkalmazott becslési módszertől).
+A vizsgált időszak vége felé országosan 22-27 perc körül, Budapesten 25-30 perc körül alakult a becsült 90. percentilis a P1 prioritási kategóriában (függően a konkrét hónaptól és az alkalmazott becslési módszertől).
+
+A becsült 15 percen belüli kiérkezési arány:
+
+```{r, echo = FALSE}
+ggplot(
+  RawDataProc[CATEGORY == "P1" & type == "percentage" &
+                variable != "CDF15"],
+  aes(x = DATE, y = value, group = varname, color = varname)) +
+  scale_y_continuous(labels = scales::percent) +
+  facet_wrap(~GEO) + geom_line() +
+  labs(x = "", y = "15 percen belüli kiérkezési arány [%]",
+       color = "",
+       title = "OMSZ kiérkezési idők, P1 prioritás",
+       caption = "Ferenci Tamás, https://www.medstat.hu/") +
+  theme(legend.position = "bottom") +
+  guides(color = guide_legend(ncol = 2))
+```
+
+A vizsgált időszak vége felé országosan 60-70% körül, Budapesten 55-60% körül alakult a becsült 15 percen belüli kiérkezési arány a P1 prioritási kategóriában (függően a konkrét hónaptól és az alkalmazott becslési módszertől).
 
 ### P2 prioritás
 
 Végül még ábrázolom a **P2** prioritási kategóriát; ide tartoznak a potenciálisan életveszélyes, gyors beavatkozást igénylő állapotok (pl. légúti idegentest nehézlégzés nélkül, közepesfokú égés, vérhányás, hirtelen látás- vagy hallásvesztés). Itt így alakult a becsült 90. percentilis:
 
 ```{r, echo = FALSE}
-ggplot(RawDataProc[CATEGORY == "P2" & variable != "P90"],
-       aes(x = DATE, y = value, group = varname, color = varname)) +
+ggplot(
+  RawDataProc[CATEGORY == "P2" & type == "time" &
+                variable != "P90"],
+  aes(x = DATE, y = value, group = varname, color = varname)) +
   scale_y_continuous(breaks = seq(0, 200, 10)) +
   facet_wrap(~GEO) + geom_line() +
   labs(x = "", y = "Kiérkezési idő [perc]", color = "",
        title = "OMSZ kiérkezési idők, P2 prioritás",
        caption = "Ferenci Tamás, https://www.medstat.hu/") +
-  theme(legend.position = "bottom")
+  theme(legend.position = "bottom") +
+  guides(color = guide_legend(ncol = 3))
 ```
 
-Az utóbbi időben országosan 40-45 perc körül, Budapesten 60-70 perc körül alakult a becsült 90. percentilis a P2 prioritási kategóriában (függően a konkrét hónaptól és az alkalmazott becslési módszertől).
+A vizsgált időszak vége felé országosan 40-45 perc körül, Budapesten 60-70 perc körül alakult a becsült 90. percentilis a P2 prioritási kategóriában (függően a konkrét hónaptól és az alkalmazott becslési módszertől).
+
+A becsült 15 percen belüli kiérkezési arány:
+
+```{r, echo = FALSE}
+ggplot(
+  RawDataProc[CATEGORY == "P2" & type == "percentage" &
+                variable != "CDF15"],
+  aes(x = DATE, y = value, group = varname, color = varname)) +
+  scale_y_continuous(labels = scales::percent) +
+  facet_wrap(~GEO) + geom_line() +
+  labs(x = "", y = "15 percen belüli kiérkezési arány [%]",
+       color = "",
+       title = "OMSZ kiérkezési idők, P2 prioritás",
+       caption = "Ferenci Tamás, https://www.medstat.hu/") +
+  theme(legend.position = "bottom") +
+  guides(color = guide_legend(ncol = 2))
+```
+
+A vizsgált időszak vége felé országosan 45% körül, Budapesten 20-30% körül alakult a becsült 15 percen belüli kiérkezési arány a P2 prioritási kategóriában (függően a konkrét hónaptól és az alkalmazott becslési módszertől).
 
 ### Záró megjegyzés
 
@@ -258,7 +326,7 @@ Egy szó mint száz: úgy tűnik, hogy a lognormális eloszlással egyszerűen s
 
 A kérdés innentől inkább számítástechnikai. Próbáljunk a dologra egy univerzális megoldást adni!
 
-Először is, kell egy célfüggvény. Ez azt kell, hogy leírja, hogy a numerikusan kiszámolt várható érték és medián egyezik-e a megadott értékkel. Pontosabban szólva, numerikus optimalizálásról lévén szó, nem egyezik, hanem közel van hozzá, magyarul a célfüggvény azt kell lemérje, hogy mennyire vagyunk közel. Nagyképűen ez többkritériumú probléma (hiszen a várható érték is van valamennyire a valóditól, meg a medián is), de mivel bízhatunk abban, hogy kb. tökéletes megoldást tudunk találni, így ennek remélhetőleg nem lesz nagy jelentősége, egyszerűen használjuk a két eltérés négyzetének sima összegét (ezzel azt is mondtuk, hogy az eltéréseknél a négyzetet használjuk, vélhetően szintén azt fogjuk tapasztalni, hogy ennek nincs jelentősége). Például:
+Először is, kell egy célfüggvény. Ez azt kell, hogy leírja, hogy a numerikusan kiszámolt várható érték és medián egyezik-e a megadott értékkel. Pontosabban szólva, numerikus optimalizálásról lévén szó, nem egyezik, hanem közel van hozzá, magyarul a célfüggvény azt kell lemérje, hogy mennyire vagyunk közel. Nagyképűen ez többkritériumú probléma (hiszen a várható érték is van valamennyire a valóditól, meg a medián is), de mivel bízhatunk abban, hogy kb. tökéletes megoldást tudunk találni, így ennek remélhetőleg nem lesz nagy jelentősége, egyszerűen használjuk a két eltérés négyzetének sima összegét. Például:
 
 ```{r, eval = FALSE}
 errlnorm <- function(par, mean, median) {
@@ -267,7 +335,7 @@ errlnorm <- function(par, mean, median) {
 }
 ```
 
-Itt a kvantilist függvényhívással számoltattuk -- noha beírhattuk volna nagyon könnyen az elméleti értéket is ez esetben, azért döntöttem mégis e megoldás mellett, mert ez a séma később is, minden esetben működni fog, míg a formulát esetről-esetre cserélgetni kellene (ráadásul, mint láttuk, azt sem biztos, hogy létezik). Sajnos az átlagnál ezt nem tehetjük meg, egyszerűen azért, mert az R-nek nincs beépített átlag-függvénye az eloszlásokhoz, de ha ezt kipótoljuk...
+Itt a kvantilist függvényhívással számoltattuk -- noha beírhattuk volna nagyon könnyen az elméleti értéket is ez esetben, azért döntöttem mégis e megoldás mellett, mert ez a séma később is, minden esetben működni fog, míg a formulát esetről-esetre cserélgetni kellene (ráadásul, mint láttuk, az sem biztos, hogy létezik). Sajnos az átlagnál ezt nem tehetjük meg, egyszerűen azért, mert az R-nek nincs beépített átlag-függvénye az eloszlásokhoz, de ha ezt kipótoljuk...
 
 ```{r, eval = FALSE}
 mlnorm <- function(par) exp(par[1] + par[2]^2/2)
@@ -298,7 +366,8 @@ Ez majdnem tökéletes, az egyetlen probléma, ami felvethető, hogy bizonyos el
 errfun <- function(dist, par, mean, median) {
   par[ poss[[dist]] ] <- exp(par[ poss[[dist]] ])
   (do.call(paste0("m", dist), list(par)) - mean)^2 +
-    (do.call(paste0("q", dist), as.list(c(p = 0.5, par))) - median)^2
+    (do.call(paste0("q", dist),
+             as.list(c(p = 0.5, par))) - median)^2
 }
 ```
 
@@ -309,7 +378,7 @@ poss <- list(lnorm = c(FALSE, TRUE), gamma = c(TRUE, TRUE),
              weibull = c(TRUE, TRUE), invgauss = c(TRUE, TRUE))
 ```
 
-Meg is vagyunk! Definiáljuk most a használt eloszlások várható értékeit (illetve ahol külső könyvtárból hívjuk a kvantilist, ott annak is adjunk reguláris nevet):
+Meg is vagyunk! Definiáljuk most a használt eloszlások várható értékeit (illetve ahol külső könyvtárból hívjuk a kvantilist és az eloszlásfüggvényt, ott annak is adjunk reguláris nevet):
 
 ```{r}
 mlnorm <- function(par) exp(par[1] + par[2]^2/2)
@@ -317,6 +386,7 @@ mgamma <- function(par) par[1]/par[2]
 mweibull <- function(par) par[2] * gamma(1 + 1/par[1])
 minvgauss <- function(par) par[1]
 qinvgauss <- actuar::qinvgauss
+pinvgauss <- actuar::pinvgauss
 ```
 
 Helyes gyakorlat ilyen esetekben legalább egy-két példán szimulációsan is ellenőrizni magunkat, nehogy hibát vétsünk (akár matematikait, akár a kódolásnál). Például:
@@ -353,38 +423,47 @@ Jól látszik, hogy a függvényben is gondoskodunk szükség esetén az exponen
 Itt is próbáljuk ki a működést:
 
 ```{r}
-solpar("lnorm", 12, 11)
+sol1 <- solpar("lnorm", 12, 11)
+sol1
+exp(sol1[[1]] + sol1[[2]]^2/2)
+exp(sol1[[1]])
 ```
 
-Jól néz ki! Most már csak annyi van hátra, hogy az immár azonosított eloszlásnak kiszámítsuk a megfelelő kvantilisét; a kényelem kedvéért definiáljunk erre is egy függvényt:
+Jól néz ki! Most már csak annyi van hátra, hogy az immár azonosított eloszlásnak kiszámítsuk a megfelelő kvantilisét, illetve megfelelő eloszlásfüggvény-értékét; a kényelem kedvéért definiáljunk ezekre egy-egy függvényt:
 
 ```{r}
 estquantile <- function(dist, mean, median, p) {
   do.call(paste0("q", dist), c(p = p, solpar(dist, mean, median)))
 }
+estcdf <- function(dist, mean, median, q) {
+  do.call(paste0("p", dist), c(q = q, solpar(dist, mean, median)))
+}
 ```
 
 #### Az eredmény kiszámítása, ellenőrzése és elmentése
 
-Ez után nincs más dolgunk hátra, mint ezt a függvényt alkalmazni a táblára, és ilyen módon kiszámolni a becsült értékeket. Tegyük célszerűen automatikusan minden esetre egy hívásban; ehhez vezessünk be egy segédfüggvényt, csak hogy kevesebbet kelljen írni:
+Ez után nincs más dolgunk, mint ezeket a függvényeket alkalmazni a táblára, és ilyen módon kiszámolni a becsült értékeket. Tegyük célszerűen automatikussá minden esetre egy hívásban; ehhez vezessünk be egy-egy segédfüggvényt, csak hogy kevesebbet kelljen írni:
 
 ```{r}
 estquantileOMSZ <- function(x, dist, p = 0.9)
   estquantile(dist, as.numeric(x["Átlag"]),
               as.numeric(x["Medián"]), p = p)
+estcdfOMSZ <- function(x, dist, q = 15)
+  estcdf(dist, as.numeric(x["Átlag"]),
+         as.numeric(x["Medián"]), q = q)
 ```
 
-Ezzel már tényleg könnyű a dolog az `apply` használatával:
+Ezekkel már tényleg könnyű a dolog az `apply` használatával:
 
 ```{r}
-RawDataWide$P90gamma <- apply(RawDataWide, 1, estquantileOMSZ,
-                              dist = "gamma")
-RawDataWide$P90lnorm <- apply(RawDataWide, 1, estquantileOMSZ,
-                              dist = "lnorm")
-RawDataWide$P90weibull <- apply(RawDataWide, 1, estquantileOMSZ,
-                                dist = "weibull")
-RawDataWide$P90invgauss <- apply(RawDataWide, 1, estquantileOMSZ,
-                                 dist = "invgauss")
+for(dist in c("gamma", "lnorm", "weibull", "invgauss"))
+  RawDataWide[[paste0("P90", dist)]] <- apply(RawDataWide, 1,
+                                              estquantileOMSZ,
+                                              dist = dist)
+for(dist in c("gamma", "lnorm", "weibull", "invgauss"))
+  RawDataWide[[paste0("CDF15", dist)]] <- apply(RawDataWide, 1,
+                                                estcdfOMSZ,
+                                                dist = dist)
 ```
 
 Utolsó biztonsági ellenőrzésként a lognormálist számoljuk ki analitikusan is (ugye ez az egyetlen, ahol ezt meg tudjuk tenni):
@@ -393,20 +472,36 @@ Utolsó biztonsági ellenőrzésként a lognormálist számoljuk ki analitikusan
 RawDataWide$P90 <- qlnorm(0.9, log(RawDataWide$Medián),
                           sqrt((log(RawDataWide$Átlag) -
                                   log(RawDataWide$Medián)) * 2))
+RawDataWide$CDF15 <- plnorm(15, log(RawDataWide$Medián),
+                            sqrt((log(RawDataWide$Átlag) -
+                                    log(RawDataWide$Medián)) * 2))
 ```
 
-Ellenőrzésként nézzük meg, hogy a különböző módon kiszámolt becslések mennyire mozognak együtt:
+Ellenőrzésként nézzük meg, hogy a különböző módon kiszámolt becslések mennyire mozognak együtt. A percentilisek:
 
 ```{r}
-pairs(RawDataWide[, -(1:5)], panel =  function(x, y, ...) {
-  points(x, y, ...)
-  abline(a = 0,b = 1, col = "red", ...)
-})
+pairs(RawDataWide[, .(P90, P90lnorm, P90gamma, P90weibull,
+                      P90invgauss)],
+      panel =  function(x, y, ...) {
+        points(x, y, ...)
+        abline(a = 0,b = 1, col = "red", ...)
+      })
+```
+
+Az eloszlásfüggvény-értékek:
+
+```{r}
+pairs(RawDataWide[, .(CDF15, CDF15lnorm, CDF15gamma, CDF15weibull,
+                      CDF15invgauss)],
+      panel =  function(x, y, ...) {
+        points(x, y, ...)
+        abline(a = 0,b = 1, col = "red", ...)
+      })
 ```
 
 Kiváló! (Ami természetesen nem azt jelenti, hogy maguk a becslések jók, hiszen ez azon a problémán nem segít, hogy az eloszlást nem ismerjük, de azt igen, hogy a fenti számolási és kódolási munka során valószínűleg jól dolgoztunk.)
 
-Ebből egy dolgot külön is nézzünk meg: a kétféle módon számolt lognormálisnak elvileg is (egzaktan) egyeznie kell. Ha kiszámoljuk, akkor a legnagyobb különbség köztük `r round(max(abs(RawDataWide$P90 - RawDataWide$P90lnorm)), 2)` perc (`r round(max(abs(RawDataWide$P90 - RawDataWide$P90lnorm)/RawDataWide$P90)*100, 1)`%), ami az egyéb bizonytalansági források mellett elfogadható. (Néhány perces intervallumnál pontosabban amúgy sincs értelme megadni az eredményeket az alapvetően közelítés jelleg miatt, noha persze pontosan nem tudhatjuk, hogy ez mekkora bizonytalanság.)
+Ebből egy dolgot külön is nézzünk meg: a kétféle módon számolt lognormálisnak elvileg is (egzaktan) egyeznie kell. Ha kiszámoljuk, akkor a legnagyobb különbség köztük a 90. percentilisben `r round(max(abs(RawDataWide$P90 - RawDataWide$P90lnorm)), 2)` perc (`r round(max(abs(RawDataWide$P90 - RawDataWide$P90lnorm)/RawDataWide$P90)*100, 1)`%), a 15 perchez tartozó eloszlásfüggvény-értékben  `r round(max(abs(RawDataWide$CDF15 - RawDataWide$CDF15lnorm)) * 100, 1)` %pont (`r round(max(abs(RawDataWide$CDF15 - RawDataWide$CDF15lnorm)/RawDataWide$CDF15)*100, 1)`%), ami az egyéb bizonytalansági források mellett elfogadható. (Percnyi, illetve százalékpontnyi precizitásnál pontosabban amúgy sincs értelme megadni az eredményeket az alapvetően közelítés jelleg miatt, noha persze pontosan nem tudhatjuk, hogy ez mekkora bizonytalanság.)
 
 Úgyhogy nincs más dolgunk, mint kimenteni az eredményeket, célszerűen R-ben használható, és további gépi feldolgozásra is alkalmas formátumban is:
 
@@ -419,24 +514,31 @@ saveRDS(RawDataWide, "OMSZ-kierkezesi-ido.rds")
 A gépi feldolgozáshoz jól fog jönni, ha ismét long formátumúra alakítjuk az adatokat; egyúttal adjunk normális neveket is:
 
 ```{r}
+vars <- c("Átlag", "Medián",
+          "Becsült P90 (gamma)",
+          "Becsült P90 (lognormális)",
+          "Becsült P90 (Weibull)",
+          "Becsült P90 (inv. normális)",
+          "Becsült P90 (egzakt lognormális)",
+          "Becsült CDF15 (gamma)",
+          "Becsült CDF15 (lognormális)",
+          "Becsült CDF15 (Weibull)",
+          "Becsült CDF15 (inv. normális)",
+          "Becsült CDF15 (egzakt lognormális)")
+
 RawDataProc <- melt(RawDataWide,
                     id.vars = c("DATE", "CATEGORY", "GEO"))
 RawDataProc <- merge(RawDataProc, data.table(
-  variable = c("Átlag", "Medián", "P90gamma", "P90lnorm",
-               "P90weibull", "P90invgauss", "P90"),
-  varname = c("Átlag", "Medián", "Becsült P90 (gamma)",
-              "Becsült P90 (lognormális)",
-              "Becsült P90 (Weibull)",
-              "Becsült P90 (inv. normális)",
-              "Becsült P90 (egzakt lognormális)")
+  variable = c("Átlag", "Medián",
+               "P90gamma", "P90lnorm",  "P90weibull",
+               "P90invgauss", "P90",
+               "CDF15gamma", "CDF15lnorm", "CDF15weibull",
+               "CDF15invgauss", "CDF15"),
+  varname = vars,
+  type = c(rep("time", 7), rep("percentage", 5))
 ), by = "variable")
-RawDataProc$varname <- factor(
-  RawDataProc$varname, levels =
-    c("Átlag", "Medián", "Becsült P90 (gamma)",
-      "Becsült P90 (lognormális)",
-      "Becsült P90 (Weibull)",
-      "Becsült P90 (inv. normális)",
-      "Becsült P90 (egzakt lognormális)"))
+RawDataProc$varname <- factor(RawDataProc$varname, levels = vars)
+
 saveRDS(RawDataProc, "OMSZ-kierkezesi-ido-long.rds")
 ```
 
@@ -444,6 +546,6 @@ saveRDS(RawDataProc, "OMSZ-kierkezesi-ido-long.rds")
 
 - Adható-e valamilyen elméleti abszolút korlát arra, hogy adott átlag és medián mellett hol lehet a 0,9-kvantilis? (A Markov-egyenlőtlenség például azt mondja, ha nem tévedek, hogy biztosan kisebb, mint az átlag 10-szerese. Ez már valami, és válasz a kérdésre, csak nagyon gyenge. Lehet élesíteni? Lehet adni nem csak felső, de alsó korlátot is...?)
 - A log-*t* eloszlást illesztő megoldásnál kipróbálni azt, hogy minden lehetséges szabadsági fokkal mi az eredmények tartománya (így megoldva a három-paraméteres problémát). Igazából lehet, hogy elég lenne $\nu=1$-gyel, hiszen ez van a legtávolabb a lognormálistól, amit amúgyis használunk.
-- Kicsit jobb optimalizáló-algoritmus használata (így is jó, de azért a `P90` és a `P90lnorm` között illene, hogy kb. nulla legyen a különbség).
+- Kicsit jobb optimalizáló-algoritmus használata (így is jó, de azért a `P90` és a `P90lnorm`, illetve a `CDF15` és a `CDF15lnorm` között illene, hogy kb. nulla legyen a különbség).
 
 ## Irodalomjegyzék

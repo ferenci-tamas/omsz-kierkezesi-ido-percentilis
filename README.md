@@ -2,7 +2,7 @@ Az Országos Mentőszolgálat kiérkezési statisztikáinak vizsgálata: a 90.
 percentilis becslése
 ================
 Ferenci Tamás (<https://www.medstat.hu/>)<br>
-2025. szeptember 8.
+2025. szeptember 9.
 
 - [Összefoglaló](#összefoglaló)
 - [Bevezetés](#bevezetés)
@@ -416,10 +416,19 @@ megközelítéseket mutatják, ahogy fent is szerepelt):
 
 <img src="README_files/figure-gfm/unnamed-chunk-3-1.png" width="100%" />
 
-Az utóbbi időben országosan 19-23 perc körül, Budapesten 17-25 perc
-körül alakult a becsült 90. percentilis a Kiemelt P1 prioritási
-kategóriában (függően a konkrét hónaptól és az alkalmazott becslési
-módszertől).
+A vizsgált időszak vége felé országosan 19-23 perc körül, Budapesten
+17-25 perc körül alakult a becsült 90. percentilis a Kiemelt P1
+prioritási kategóriában (függően a konkrét hónaptól és az alkalmazott
+becslési módszertől).
+
+A becsült 15 percen belüli kiérkezési arány:
+
+<img src="README_files/figure-gfm/unnamed-chunk-4-1.png" width="100%" />
+
+A vizsgált időszak vége felé országosan 70-80% körül, Budapesten 65-80%
+körül alakult a becsült 15 percen belüli kiérkezési arány a Kiemelt P1
+prioritási kategóriában (függően a konkrét hónaptól és az alkalmazott
+becslési módszertől).
 
 ### P1 prioritás
 
@@ -430,11 +439,21 @@ trauma, zajló görcsroham, végtagamputáció, súlyos égés, a legmagasabb
 időfaktorú esetek kivételével). Itt így alakult a becsült 90.
 percentilis:
 
-<img src="README_files/figure-gfm/unnamed-chunk-4-1.png" width="100%" />
+<img src="README_files/figure-gfm/unnamed-chunk-5-1.png" width="100%" />
 
-Az utóbbi időben országosan 22-27 perc körül, Budapesten 25-30 perc
-körül alakult a becsült 90. percentilis a P1 prioritási kategóriában
-(függően a konkrét hónaptól és az alkalmazott becslési módszertől).
+A vizsgált időszak vége felé országosan 22-27 perc körül, Budapesten
+25-30 perc körül alakult a becsült 90. percentilis a P1 prioritási
+kategóriában (függően a konkrét hónaptól és az alkalmazott becslési
+módszertől).
+
+A becsült 15 percen belüli kiérkezési arány:
+
+<img src="README_files/figure-gfm/unnamed-chunk-6-1.png" width="100%" />
+
+A vizsgált időszak vége felé országosan 60-70% körül, Budapesten 55-60%
+körül alakult a becsült 15 percen belüli kiérkezési arány a P1
+prioritási kategóriában (függően a konkrét hónaptól és az alkalmazott
+becslési módszertől).
 
 ### P2 prioritás
 
@@ -444,11 +463,21 @@ légúti idegentest nehézlégzés nélkül, közepesfokú égés, vérhányás,
 hirtelen látás- vagy hallásvesztés). Itt így alakult a becsült 90.
 percentilis:
 
-<img src="README_files/figure-gfm/unnamed-chunk-5-1.png" width="100%" />
+<img src="README_files/figure-gfm/unnamed-chunk-7-1.png" width="100%" />
 
-Az utóbbi időben országosan 40-45 perc körül, Budapesten 60-70 perc
-körül alakult a becsült 90. percentilis a P2 prioritási kategóriában
-(függően a konkrét hónaptól és az alkalmazott becslési módszertől).
+A vizsgált időszak vége felé országosan 40-45 perc körül, Budapesten
+60-70 perc körül alakult a becsült 90. percentilis a P2 prioritási
+kategóriában (függően a konkrét hónaptól és az alkalmazott becslési
+módszertől).
+
+A becsült 15 percen belüli kiérkezési arány:
+
+<img src="README_files/figure-gfm/unnamed-chunk-8-1.png" width="100%" />
+
+A vizsgált időszak vége felé országosan 45% körül, Budapesten 20-30%
+körül alakult a becsült 15 percen belüli kiérkezési arány a P2
+prioritási kategóriában (függően a konkrét hónaptól és az alkalmazott
+becslési módszertől).
 
 ### Záró megjegyzés
 
@@ -620,9 +649,7 @@ hogy mennyire vagyunk közel. Nagyképűen ez többkritériumú probléma
 (hiszen a várható érték is van valamennyire a valóditól, meg a medián
 is), de mivel bízhatunk abban, hogy kb. tökéletes megoldást tudunk
 találni, így ennek remélhetőleg nem lesz nagy jelentősége, egyszerűen
-használjuk a két eltérés négyzetének sima összegét (ezzel azt is
-mondtuk, hogy az eltéréseknél a négyzetet használjuk, vélhetően szintén
-azt fogjuk tapasztalni, hogy ennek nincs jelentősége). Például:
+használjuk a két eltérés négyzetének sima összegét. Például:
 
 ``` r
 errlnorm <- function(par, mean, median) {
@@ -635,7 +662,7 @@ Itt a kvantilist függvényhívással számoltattuk – noha beírhattuk volna
 nagyon könnyen az elméleti értéket is ez esetben, azért döntöttem mégis
 e megoldás mellett, mert ez a séma később is, minden esetben működni
 fog, míg a formulát esetről-esetre cserélgetni kellene (ráadásul, mint
-láttuk, azt sem biztos, hogy létezik). Sajnos az átlagnál ezt nem
+láttuk, az sem biztos, hogy létezik). Sajnos az átlagnál ezt nem
 tehetjük meg, egyszerűen azért, mert az R-nek nincs beépített
 átlag-függvénye az eloszlásokhoz, de ha ezt kipótoljuk…
 
@@ -691,7 +718,8 @@ módosítjuk a fenti függvényt:
 errfun <- function(dist, par, mean, median) {
   par[ poss[[dist]] ] <- exp(par[ poss[[dist]] ])
   (do.call(paste0("m", dist), list(par)) - mean)^2 +
-    (do.call(paste0("q", dist), as.list(c(p = 0.5, par))) - median)^2
+    (do.call(paste0("q", dist),
+             as.list(c(p = 0.5, par))) - median)^2
 }
 ```
 
@@ -704,8 +732,8 @@ poss <- list(lnorm = c(FALSE, TRUE), gamma = c(TRUE, TRUE),
 ```
 
 Meg is vagyunk! Definiáljuk most a használt eloszlások várható értékeit
-(illetve ahol külső könyvtárból hívjuk a kvantilist, ott annak is adjunk
-reguláris nevet):
+(illetve ahol külső könyvtárból hívjuk a kvantilist és az
+eloszlásfüggvényt, ott annak is adjunk reguláris nevet):
 
 ``` r
 mlnorm <- function(par) exp(par[1] + par[2]^2/2)
@@ -713,6 +741,7 @@ mgamma <- function(par) par[1]/par[2]
 mweibull <- function(par) par[2] * gamma(1 + 1/par[1])
 minvgauss <- function(par) par[1]
 qinvgauss <- actuar::qinvgauss
+pinvgauss <- actuar::pinvgauss
 ```
 
 Helyes gyakorlat ilyen esetekben legalább egy-két példán szimulációsan
@@ -805,7 +834,8 @@ exponenciálásról.
 Itt is próbáljuk ki a működést:
 
 ``` r
-solpar("lnorm", 12, 11)
+sol1 <- solpar("lnorm", 12, 11)
+sol1
 ```
 
     ## [[1]]
@@ -814,40 +844,59 @@ solpar("lnorm", 12, 11)
     ## [[2]]
     ## [1] 0.4181431
 
+``` r
+exp(sol1[[1]] + sol1[[2]]^2/2)
+```
+
+    ## [1] 11.99859
+
+``` r
+exp(sol1[[1]])
+```
+
+    ## [1] 10.9942
+
 Jól néz ki! Most már csak annyi van hátra, hogy az immár azonosított
-eloszlásnak kiszámítsuk a megfelelő kvantilisét; a kényelem kedvéért
-definiáljunk erre is egy függvényt:
+eloszlásnak kiszámítsuk a megfelelő kvantilisét, illetve megfelelő
+eloszlásfüggvény-értékét; a kényelem kedvéért definiáljunk ezekre
+egy-egy függvényt:
 
 ``` r
 estquantile <- function(dist, mean, median, p) {
   do.call(paste0("q", dist), c(p = p, solpar(dist, mean, median)))
 }
+estcdf <- function(dist, mean, median, q) {
+  do.call(paste0("p", dist), c(q = q, solpar(dist, mean, median)))
+}
 ```
 
 #### Az eredmény kiszámítása, ellenőrzése és elmentése
 
-Ez után nincs más dolgunk hátra, mint ezt a függvényt alkalmazni a
+Ez után nincs más dolgunk, mint ezeket a függvényeket alkalmazni a
 táblára, és ilyen módon kiszámolni a becsült értékeket. Tegyük
-célszerűen automatikusan minden esetre egy hívásban; ehhez vezessünk be
-egy segédfüggvényt, csak hogy kevesebbet kelljen írni:
+célszerűen automatikussá minden esetre egy hívásban; ehhez vezessünk be
+egy-egy segédfüggvényt, csak hogy kevesebbet kelljen írni:
 
 ``` r
 estquantileOMSZ <- function(x, dist, p = 0.9)
   estquantile(dist, as.numeric(x["Átlag"]),
               as.numeric(x["Medián"]), p = p)
+estcdfOMSZ <- function(x, dist, q = 15)
+  estcdf(dist, as.numeric(x["Átlag"]),
+         as.numeric(x["Medián"]), q = q)
 ```
 
-Ezzel már tényleg könnyű a dolog az `apply` használatával:
+Ezekkel már tényleg könnyű a dolog az `apply` használatával:
 
 ``` r
-RawDataWide$P90gamma <- apply(RawDataWide, 1, estquantileOMSZ,
-                              dist = "gamma")
-RawDataWide$P90lnorm <- apply(RawDataWide, 1, estquantileOMSZ,
-                              dist = "lnorm")
-RawDataWide$P90weibull <- apply(RawDataWide, 1, estquantileOMSZ,
-                                dist = "weibull")
-RawDataWide$P90invgauss <- apply(RawDataWide, 1, estquantileOMSZ,
-                                 dist = "invgauss")
+for(dist in c("gamma", "lnorm", "weibull", "invgauss"))
+  RawDataWide[[paste0("P90", dist)]] <- apply(RawDataWide, 1,
+                                              estquantileOMSZ,
+                                              dist = dist)
+for(dist in c("gamma", "lnorm", "weibull", "invgauss"))
+  RawDataWide[[paste0("CDF15", dist)]] <- apply(RawDataWide, 1,
+                                                estcdfOMSZ,
+                                                dist = dist)
 ```
 
 Utolsó biztonsági ellenőrzésként a lognormálist számoljuk ki
@@ -857,19 +906,37 @@ analitikusan is (ugye ez az egyetlen, ahol ezt meg tudjuk tenni):
 RawDataWide$P90 <- qlnorm(0.9, log(RawDataWide$Medián),
                           sqrt((log(RawDataWide$Átlag) -
                                   log(RawDataWide$Medián)) * 2))
+RawDataWide$CDF15 <- plnorm(15, log(RawDataWide$Medián),
+                            sqrt((log(RawDataWide$Átlag) -
+                                    log(RawDataWide$Medián)) * 2))
 ```
 
 Ellenőrzésként nézzük meg, hogy a különböző módon kiszámolt becslések
-mennyire mozognak együtt:
+mennyire mozognak együtt. A percentilisek:
 
 ``` r
-pairs(RawDataWide[, -(1:5)], panel =  function(x, y, ...) {
-  points(x, y, ...)
-  abline(a = 0,b = 1, col = "red", ...)
-})
+pairs(RawDataWide[, .(P90, P90lnorm, P90gamma, P90weibull,
+                      P90invgauss)],
+      panel =  function(x, y, ...) {
+        points(x, y, ...)
+        abline(a = 0,b = 1, col = "red", ...)
+      })
 ```
 
-<img src="README_files/figure-gfm/unnamed-chunk-25-1.png" width="100%" />
+<img src="README_files/figure-gfm/unnamed-chunk-28-1.png" width="100%" />
+
+Az eloszlásfüggvény-értékek:
+
+``` r
+pairs(RawDataWide[, .(CDF15, CDF15lnorm, CDF15gamma, CDF15weibull,
+                      CDF15invgauss)],
+      panel =  function(x, y, ...) {
+        points(x, y, ...)
+        abline(a = 0,b = 1, col = "red", ...)
+      })
+```
+
+<img src="README_files/figure-gfm/unnamed-chunk-29-1.png" width="100%" />
 
 Kiváló! (Ami természetesen nem azt jelenti, hogy maguk a becslések jók,
 hiszen ez azon a problémán nem segít, hogy az eloszlást nem ismerjük, de
@@ -878,11 +945,12 @@ jól dolgoztunk.)
 
 Ebből egy dolgot külön is nézzünk meg: a kétféle módon számolt
 lognormálisnak elvileg is (egzaktan) egyeznie kell. Ha kiszámoljuk,
-akkor a legnagyobb különbség köztük 0.51 perc (2.5%), ami az egyéb
-bizonytalansági források mellett elfogadható. (Néhány perces
-intervallumnál pontosabban amúgy sincs értelme megadni az eredményeket
-az alapvetően közelítés jelleg miatt, noha persze pontosan nem
-tudhatjuk, hogy ez mekkora bizonytalanság.)
+akkor a legnagyobb különbség köztük a 90. percentilisben 0.51 perc
+(2.5%), a 15 perchez tartozó eloszlásfüggvény-értékben 0.7 %pont (0.9%),
+ami az egyéb bizonytalansági források mellett elfogadható. (Percnyi,
+illetve százalékpontnyi precizitásnál pontosabban amúgy sincs értelme
+megadni az eredményeket az alapvetően közelítés jelleg miatt, noha
+persze pontosan nem tudhatjuk, hogy ez mekkora bizonytalanság.)
 
 Úgyhogy nincs más dolgunk, mint kimenteni az eredményeket, célszerűen
 R-ben használható, és további gépi feldolgozásra is alkalmas formátumban
@@ -898,24 +966,31 @@ A gépi feldolgozáshoz jól fog jönni, ha ismét long formátumúra alakítjuk
 az adatokat; egyúttal adjunk normális neveket is:
 
 ``` r
+vars <- c("Átlag", "Medián",
+          "Becsült P90 (gamma)",
+          "Becsült P90 (lognormális)",
+          "Becsült P90 (Weibull)",
+          "Becsült P90 (inv. normális)",
+          "Becsült P90 (egzakt lognormális)",
+          "Becsült CDF15 (gamma)",
+          "Becsült CDF15 (lognormális)",
+          "Becsült CDF15 (Weibull)",
+          "Becsült CDF15 (inv. normális)",
+          "Becsült CDF15 (egzakt lognormális)")
+
 RawDataProc <- melt(RawDataWide,
                     id.vars = c("DATE", "CATEGORY", "GEO"))
 RawDataProc <- merge(RawDataProc, data.table(
-  variable = c("Átlag", "Medián", "P90gamma", "P90lnorm",
-               "P90weibull", "P90invgauss", "P90"),
-  varname = c("Átlag", "Medián", "Becsült P90 (gamma)",
-              "Becsült P90 (lognormális)",
-              "Becsült P90 (Weibull)",
-              "Becsült P90 (inv. normális)",
-              "Becsült P90 (egzakt lognormális)")
+  variable = c("Átlag", "Medián",
+               "P90gamma", "P90lnorm",  "P90weibull",
+               "P90invgauss", "P90",
+               "CDF15gamma", "CDF15lnorm", "CDF15weibull",
+               "CDF15invgauss", "CDF15"),
+  varname = vars,
+  type = c(rep("time", 7), rep("percentage", 5))
 ), by = "variable")
-RawDataProc$varname <- factor(
-  RawDataProc$varname, levels =
-    c("Átlag", "Medián", "Becsült P90 (gamma)",
-      "Becsült P90 (lognormális)",
-      "Becsült P90 (Weibull)",
-      "Becsült P90 (inv. normális)",
-      "Becsült P90 (egzakt lognormális)"))
+RawDataProc$varname <- factor(RawDataProc$varname, levels = vars)
+
 saveRDS(RawDataProc, "OMSZ-kierkezesi-ido-long.rds")
 ```
 
@@ -933,8 +1008,8 @@ saveRDS(RawDataProc, "OMSZ-kierkezesi-ido-long.rds")
   $\nu=1$-gyel, hiszen ez van a legtávolabb a lognormálistól, amit
   amúgyis használunk.
 - Kicsit jobb optimalizáló-algoritmus használata (így is jó, de azért a
-  `P90` és a `P90lnorm` között illene, hogy kb. nulla legyen a
-  különbség).
+  `P90` és a `P90lnorm`, illetve a `CDF15` és a `CDF15lnorm` között
+  illene, hogy kb. nulla legyen a különbség).
 
 ## Irodalomjegyzék
 
