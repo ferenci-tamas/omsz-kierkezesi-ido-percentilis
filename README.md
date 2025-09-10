@@ -1233,9 +1233,9 @@ Research Part C: Emerging Technologies* 65: 97–110.
     lásd a korábban emlegetett minőségi standardokat, de valójában
     tényleg van benne önkényesség, aligha lehet megindokolni, hogy mivel
     jobb, mintha 14 vagy 16 percet vettünk volna. De ha meggondoljuk ez
-    a percentilisre is igaz: miért pont 90. percentilist nézzük és nem a
-    89. vagy 91. percentilist? Igazából tehát ilyen szempontból nincs
-    különbség a két megközelítés között. Természetesen még
+    a percentilisre is igaz: miért pont a 90. percentilist nézzük és nem
+    a 89. vagy a 91. percentilist? Igazából tehát ilyen szempontból
+    nincs különbség a két megközelítés között. Természetesen még
     informatívabb, ha megadjuk nem *csak* 15 percre, hanem 14 és 16
     percre is – nem csak a 90. percentilist közöljük, hanem a 89.-et és
     a 91.-et is – de egyrészt ezzel elveszítjük azt, hogy egyetlen
