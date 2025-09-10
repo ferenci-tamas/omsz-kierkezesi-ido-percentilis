@@ -18,7 +18,7 @@ library(data.table)
 library(ggplot2)
 theme_set(theme_bw())
 RawDataProc <- readRDS("OMSZ-kierkezesi-ido-long.rds")
-set.seed(1)
+set.seed(2)
 ```
 
 ## Összefoglaló
@@ -70,9 +70,53 @@ Akármilyen középértékeket is használunk, egy közös problémájuk van: a 
 
 Itt érdemes egy pillanatra megállni a különféle standardok, elvárások kapcsán. Gyakran szokták emlegetni a "15 perces szabályt", tehát, hogy a legsürgősebb esetekhez ennyi idő alatt érjen ki a mentő, de azt talán már kevesebben gondolják végig, hogy ez *pontosan* mit is jelent. Azt, hogy *mindenkihez* érjen ki a mentő 15 perc alatt ilyen sürgősségnél? (Tehát a mérőszámunk a maximális kiérkezési idő legyen?) Ez jól hangzik, és tényleg nagyon megnyugtató, ha így van, csak sajnos valószínűleg a világ egyetlen országában sem teljesül, hiszen *egyszer* bárhol előfordulhat valamilyen vis maior. Ezt tehát aligha lehet elvárni, és nem is lenne túl fair mutató, ha egymilliószor kiérünk egy perc alatt, egyszer pedig egy óra alatt, azt mondani jellemzésként, hogy "1 óra volt a maximális kiérkezési idő". A statisztikusok úgy mondanák: a maximum nagyon érzékeny mutató, mert egyetlen érték is el tudja húzni, ezért nem jellemzi jól az eloszlás szélét. Másik oldalról viszont a medián sem jó, mert noha nem érzékeny, de nem az eloszlás szélét jellemzi, ahogy arról az imént szó volt. Akkor mit tegyünk?
 
-Az egyik legjobb megoldást^[Felmerülhet még az ún. extrémérték-elmélet alkalmazása. Ez nem egyszerűen az eloszlás széle felé lévő, nagyobb értékek modellezésével foglalkozik, hanem *konkrétan* a legnagyobbal. Ez azonban az esetünkben nem túl releváns. Igen, sajnálatos az az egy szem peches ember, akinek a legtöbbet kellett várnia, és igyekezni kell ezt is javítani, de ha 10 ezerből 1-nek kellett sokat várnia, az összességében azért valószínűleg nem népegészségügyi jelentőségű -- feltéve ha a maradék 9999 jóval kevesebbet várt. Ez szemben áll például egy gát méretezésének a kérdésével: ott igenis elképesztően fontos lehet az is, ha 10 ezerből csak egyetlen egyszer magasabb a vízszint mint a gát magassága, hiszen az azt jelenti, hogy akkor a várost elönti az ár... (És nem feltétlenül nagy vigasz, hogy 9999-szer mennyivel kényelmesen magasabb volt a gát, mint a vízszint.) Az extrémérték-elméletnek az ilyen és hasonló szituációk jelentik a fő alkalmazási területeit.] a felső percentilisek használata jelenti. Mi az, hogy **percentilis**? A percentilisek a medián általánosításai: a medián az az időtartam, amin belül a betegek 50%-ához érnek ki, 50%-ához nem -- a percentilis ugyanez a mutató, csak nem 50%-kal. Hanem például 75%-kal: a 75. percentilis az az időtartam, amin belül a betegek 75%-ához kiérnek -- tehát a betegek 25%-a kénytelen ennél többet várni. (A statisztikusok egyébként inkább a **kvantilis** kifejezést használják, és ezt 0,75-kvantilisnek hívják.) A mentőellátásban tipikusan a 90. percentilist használják: mennyi az az időtartam, amin belül az esetek 90%-ához kiérnek? Azaz, aminél többet a betegek 10%-a kénytelen várni. A felső percentilis azért lesz jó mutató, mert megőrzi a medián azon tulajdonságát, hogy robusztus, viszont szemben a mediánnal, már az eloszlás szélét is tudja jellemezni, nem csak a közepét^[Ilyen szempontból persze még jobb lenne a 95., a 99., a 99,9. stb. percentilis használata, hiszen azok egyre jobban *tényleg* a legszélét jelzik az eloszlásnak. A probléma az, hogy egyre romlik a becsülhetőségük: gondoljunk bele, a 99. percentilis 100 adatból a sorban 99. -- de mi van akkor, ha mondjuk összesen csak 50 megfigyelésünk van? Egész pontosan az fog történni, hogy minél nagyobb percentilist nézünk, annál bizonytalanabb, annál nagyobb ingadozású lesz a becslése. De ez egyáltalán nem meglepő, ha arra gondolunk, hogy az egyre nagyobb percentilissel egyre közelebb kerülünk a maximumhoz -- amiről már kezdetben megmondtuk, hogy nagyon ingadozó! (Voltaképp a maximum nem más, mint a 100. percentilis.) Ilyen értelemben a 90. percentilis választása egyfajta kompromisszum: már eléggé az eloszlás szélét jellemzi, de azért még nem nagyon rossz a becsülhetősége. Egyfajta "jól becsülhető majdnem-maximum". Nem szó szerint maximum, a legszél, ebből kicsit engedünk, de cserében sokkal stabilabban becsülhető.]. A 90. percentilis jól jellemzi, hogy a rosszul alakuló kiérkezési idők mennyire alakulnak rosszul -- és mint ilyen, fontos jellemzője egy mentőszolgálat teljesítményének.
+Az egyik legjobb megoldást^[Felmerülhet még az ún. extrémérték-elmélet alkalmazása. Ez nem egyszerűen az eloszlás széle felé lévő, nagyobb értékek modellezésével foglalkozik, hanem *konkrétan* a legnagyobbal. Ez azonban az esetünkben nem túl releváns. Igen, sajnálatos az az egy szem peches ember, akinek a legtöbbet kellett várnia, és igyekezni kell ezt is javítani, de ha 10 ezerből 1-nek kellett sokat várnia, az összességében azért valószínűleg nem népegészségügyi jelentőségű -- feltéve ha a maradék 9999 jóval kevesebbet várt. Ez szemben áll például egy gát méretezésének a kérdésével: ott igenis elképesztően fontos lehet az is, ha 10 ezerből csak egyetlen egyszer magasabb a vízszint mint a gát magassága, hiszen az azt jelenti, hogy akkor a várost elönti az ár... (És nem feltétlenül nagy vigasz, hogy 9999-szer mennyivel kényelmesen magasabb volt a gát, mint a vízszint.) Az extrémérték-elméletnek az ilyen és hasonló szituációk jelentik a fő alkalmazási területeit.] a felső percentilisek használata jelenti. Mi az, hogy **percentilis**? A percentilisek a medián általánosításai: a medián az az időtartam, amin belül a betegek 50%-ához érnek ki, 50%-ához nem -- a percentilis ugyanez a mutató, csak nem 50%-kal. Hanem például 75%-kal: a 75. percentilis az az időtartam, amin belül a betegek 75%-ához kiérnek -- tehát a betegek 25%-a kénytelen ennél többet várni. (A statisztikusok egyébként inkább a **kvantilis** kifejezést használják, és ezt 0,75-kvantilisnek hívják.) A mentőellátásban tipikusan a 90. percentilist használják: mennyi az az időtartam, amin belül az esetek 90%-ához kiérnek? Azaz, aminél többet a betegek 10%-a kénytelen várni. A felső percentilis azért lesz jó mutató, mert megőrzi a medián azon tulajdonságát, hogy robusztus, viszont szemben a mediánnal, már az eloszlás szélét is tudja jellemezni, nem csak a közepét^[Ilyen szempontból persze még jobb lenne a 95., a 99., a 99,9. stb. percentilis használata, hiszen azok egyre jobban *tényleg* a legszélét jelzik az eloszlásnak. A probléma az, hogy egyre romlik a becsülhetőségük: gondoljunk bele, a 99. percentilis 100 adatból a sorban 99. -- de mi van akkor, ha mondjuk összesen csak 50 megfigyelésünk van? Egész pontosan az fog történni, hogy minél nagyobb percentilist nézünk, annál bizonytalanabb, annál nagyobb ingadozású lesz a becslése. De ez egyáltalán nem meglepő, ha arra gondolunk, hogy az egyre nagyobb percentilissel egyre közelebb kerülünk a maximumhoz -- amiről már kezdetben megmondtuk, hogy nagyon ingadozó! (A maximum igazából a 100. percentilis.) Ilyen értelemben a 90. percentilis választása egyfajta kompromisszum: már eléggé az eloszlás szélét jellemzi, de azért még nem nagyon rossz a becsülhetősége. Egyfajta "jól becsülhető majdnem-maximum". Nem szó szerint maximum, a legszél, ebből kicsit engedünk, de cserében sokkal stabilabban becsülhető.]. A 90. percentilis jól jellemzi, hogy a rosszul alakuló kiérkezési idők mennyire alakulnak rosszul -- és mint ilyen, fontos jellemzője egy mentőszolgálat teljesítményének.
 
 Ezt szokták tehát mérőszámként használni a középértékek mellett, és most már azt is elárulhatom, hogy például az angol mentőszolgálat is *erre* értelmezi a 15 perces limitet! A 90. percentilis legyen 15 perc alatt, tehát az esetek legalább 90%-ához érjenek ki legfeljebb 15 perc alatt. Amint az az eljárásrendjük [megfelelő pontjából](https://www.england.nhs.uk/statistics/wp-content/uploads/sites/2/2025/01/20250117-AmbSYS-specification.pdf#%5B%7B%22num%22%3A21%2C%22gen%22%3A0%7D%2C%7B%22name%22%3A%22XYZ%22%7D%2C69%2C570%2C0%5D) ki is derül; most megint megjegyezhetném, hogy ilyet hol találunk a magyar mentőszolgálat honlapján...
+
+Továbbmenve, a széli viselkedés másik tipikus mutatója az, hogy milyen arányban ér ki a mentő adott időn, például 15 percen belül. E mutató tartalmának, és a percentilissel való kapcsolatának jobb megértéséhez érdemes az ún. eloszlásfüggvényt tekinteni: az **eloszlásfüggvény** megmutatja, hogy az esetek mekkora részéhez érnek ki adott időn belül. Ugyanazon -- szimulált -- adatoknak, amikből az előző ábra készült, így néz ki az eloszlásfüggvénye:
+
+```{r, echo = FALSE, fig.asp = 1/2}
+ggplot(data.frame(x = SimData), aes(x = x)) +
+  stat_ecdf() +
+  scale_y_continuous(labels = scales::percent,
+                     breaks = seq(0, 1, 0.1)) +
+  labs(x = "Ennyi időn belül... [perc]",
+       y = "...az esetek ekkora részéhez ér ki [%]") +
+  scale_x_continuous(breaks = seq(0, 100, 5)) +
+  annotate("segment", x = 0, y = 0.9,
+           xend = quantile(SimData, 0.9), yend = 0.9,
+           arrow = arrow(length = unit(0.1, "inches")),
+           color = "blue") +
+  annotate("segment", x = quantile(SimData, 0.9), y = 0.9,
+           xend = quantile(SimData, 0.9), yend = 0,
+           arrow = arrow(length = unit(0.1, "inches")),
+           color = "blue") +
+  annotate("segment", x = 15, y = 0, xend = 15,
+           yend = mean(SimData < 15),
+           arrow = arrow(length = unit(0.1, "inches")),
+           color = "orange") +
+  annotate("segment", x = 15, y = mean(SimData < 15), xend = 0,
+           yend = mean(SimData < 15),
+           arrow = arrow(length = unit(0.1, "inches")),
+           color = "orange") +
+  annotate("text", x = -7, y = 0.9, label = "P90", color = "blue",
+           hjust = 0) +
+  annotate("text", x = quantile(SimData, 0.9), y = -0.03,
+           label = paste0(round(quantile(SimData, 0.9), 1), " p"),
+           color = "blue") +
+  annotate("text", x = -7, y = mean(SimData < 15),
+           label = paste0(round(mean(SimData < 15) * 100, 1),
+                          "%"), color = "orange", hjust = 0) +
+  annotate("text", x = 15, y = -0.03, label = "CDF15",
+           color = "orange")
+```
+
+A fenti ábrán látható mind a 90. percentilis (rövidítés: P90), mind a 15 percen belüli kiérkezési arány (rövidítés: CDF15^[Angolul az eloszlásfüggvény neve cumulative distribution function, amit általánosan CDF-fel rövidítenek.]) számítása vizuálisan.
+
+Amit fontos megérteni, hogy e két mutató, bár elsőre fordított a logikájuk, ugyanannak az éremnek a két oldala: az is észszerű kérdés, hogy hány percen belül érnek ki 90%-hoz, és az is, hogy hány százalékhoz érnek ki 15 percen belül! Valójában tehát mindkettő ugyanúgy a széli viselkedést jellemzi^[Joggal vethető fel, hogy miért pont 15 percet nézünk -- ez nem egy teljesen hasraütésszerű szám? Lehetne erre azt válaszolni, hogy nem, lásd a korábban emlegetett minőségi standardokat, de valójában tényleg van benne önkényesség, aligha lehet megindokolni, hogy mivel jobb, mintha 14 vagy 16 percet vettünk volna. De ha meggondoljuk ez a percentilisre is igaz: miért pont 90. percentilist nézzük és nem a 89. vagy 91. percentilist? Igazából tehát ilyen szempontból nincs különbség a két megközelítés között. Természetesen még informatívabb, ha megadjuk nem *csak* 15 percre, hanem 14 és 16 percre is -- nem csak a 90. percentilist közöljük, hanem a 89.-et és a 91.-et is -- de egyrészt ezzel elveszítjük azt, hogy egyetlen számba sűrített mutatónk van, másrészt, ha továbbvisszük a gondolatot, akkor végeredményben kilyukadunk oda, hogy plottoljuk ki az egész eloszlásfüggvényt (vagy épp a hisztogramot).], csak más módon megközelítve a problémát, más szemüvegen kereszül.
+
+A két mutató között valamennyi összefüggés is van: gondoljuk végig, ha a 90. percentilis kisebb mint 15 perc, akkor biztos, hogy a 15 percen belüli kiérkezések aránya nagyobb mint 90%! Ennél többet azonban nem tudunk mondani, például nem tudjuk kiszámolni általánosan az egyikből a másikat -- mert ehhez ismerni kellene az eloszlás pontos alakját.
 
 ## Problémafelvetés
 

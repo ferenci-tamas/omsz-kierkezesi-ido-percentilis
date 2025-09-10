@@ -162,10 +162,10 @@ Kinézhet például így:
 
 Ez egy képzeletbeli példa (az adatokat én szimuláltam), ami azt mutatja,
 hogy 10 ezer mentőállátásból hány történt adott időablakon belül (5
-perces felbontásban). Volt 416 eset, ahol 5 percen belül kiért a mentő,
-3085 esetben 5 és 10 perc között, 3155 esetben 10 és 15 perc között, és
-így tovább. A legszerencsésebb embernek 1.9 percet kellett várnia, a
-legpechesebbnek 81.9 percet.
+perces felbontásban). Volt 375 eset, ahol 5 percen belül kiért a mentő,
+3008 esetben 5 és 10 perc között, 3156 esetben 10 és 15 perc között, és
+így tovább. A legszerencsésebb embernek 1.6 percet kellett várnia, a
+legpechesebbnek 71.5 percet.
 
 De hogyan jellemezzük a helyzetet egy, vagy legfeljebb néhány számba
 sűrítve? Hiszen, ahogy volt róla szó, nekünk valamilyen indikátor,
@@ -198,9 +198,9 @@ nem mehet a kiérkezési idő), a másik irányban viszont szabadon tud
 szóródni. A dolog végeredménye, hogy felfelé, ha nem is gyakran, de
 előfordulnak a többitől nagyobb, akár lényegesen nagyobb értékek, amit
 nem tudnak ellensúlyozni a másik irányban kilógó értékek, hiszen a
-kiérkezési idő 0 alá nem mehet. A fenti példában az átlag 13.8 perc.
+kiérkezési idő 0 alá nem mehet. A fenti példában az átlag 13.9 perc.
 Közepes érték ez? Ez nem igazán jó kérdés, mert hát mi az, hogy
-„közepes”, de az mindenesetre elmondható, hogy az esetek 60.3%-a kisebb
+„közepes”, de az mindenesetre elmondható, hogy az esetek 59.4%-a kisebb
 ennél! Sokan vitatkoznának, hogy mennyire „közepes” ez a kiérkezési idő,
 ha egyszer az esetek majdnem kétharmadában jobb a helyzet[^2]! Fontos
 hangsúlyozni, hogy nem arról van szó, hogy „elromlott” az átlag, az
@@ -218,7 +218,7 @@ Ez a gondolat vezet el minket a következő mutatóhoz, ami nem más, mint a
 feléhez értek ki (ebből fakadóan a feléhez ennél lassabban értek ki). A
 medián kiérkezési idő tehát egyszerűen a nagyság szerint sorbarendezett
 kiérkezési idők közül a középső. A fenti példában a medián kiérkezési
-idő 12.1 perc volt – ennyi időn belül értek ki az esetek feléhez, ebből
+idő 12.3 perc volt – ennyi időn belül értek ki az esetek feléhez, ebből
 fakadóan a betegek fele volt kénytelen várni ennél több időt. A mediánt
 sokkal kevésbé sújtja a kilógó értékek fent említett problémája[^3], úgy
 szokták mondani, hogy robusztus mutató. Ez igaz az adathibákra is, de
@@ -294,6 +294,33 @@ pontjából](https://www.england.nhs.uk/statistics/wp-content/uploads/sites/2/20
 ki is derül; most megint megjegyezhetném, hogy ilyet hol találunk a
 magyar mentőszolgálat honlapján…
 
+Továbbmenve, a széli viselkedés másik tipikus mutatója az, hogy milyen
+arányban ér ki a mentő adott időn, például 15 percen belül. E mutató
+tartalmának, és a percentilissel való kapcsolatának jobb megértéséhez
+érdemes az ún. eloszlásfüggvényt tekinteni: az **eloszlásfüggvény**
+megmutatja, hogy az esetek mekkora részéhez érnek ki adott időn belül.
+Ugyanazon – szimulált – adatoknak, amikből az előző ábra készült, így
+néz ki az eloszlásfüggvénye:
+
+<img src="README_files/figure-gfm/unnamed-chunk-2-1.png" width="100%" />
+
+A fenti ábrán látható mind a 90. percentilis (rövidítés: P90), mind a 15
+percen belüli kiérkezési arány (rövidítés: CDF15[^7]) számítása
+vizuálisan.
+
+Amit fontos megérteni, hogy e két mutató, bár elsőre fordított a
+logikájuk, ugyanannak az éremnek a két oldala: az is észszerű kérdés,
+hogy hány percen belül érnek ki 90%-hoz, és az is, hogy hány százalékhoz
+érnek ki 15 percen belül! Valójában tehát mindkettő ugyanúgy a széli
+viselkedést jellemzi[^8], csak más módon megközelítve a problémát, más
+szemüvegen kereszül.
+
+A két mutató között valamennyi összefüggés is van: gondoljuk végig, ha a
+90. percentilis kisebb mint 15 perc, akkor biztos, hogy a 15 percen
+belüli kiérkezések aránya nagyobb mint 90%! Ennél többet azonban nem
+tudunk mondani, például nem tudjuk kiszámolni általánosan az egyikből a
+másikat – mert ehhez ismerni kellene az eloszlás pontos alakját.
+
 ## Problémafelvetés
 
 Ezen iszonyatosan hosszúra nyúlt bevezető után elérünk a
@@ -344,7 +371,7 @@ széthúzható, ilyenekre kell gondolni. Példának okáért, van egy nevezetes
 eloszlás, a lognormális eloszlás, aminek kinézetét a következő ábra
 mutatja néhány különböző paraméter mellett:
 
-<img src="README_files/figure-gfm/unnamed-chunk-2-1.png" width="100%" />
+<img src="README_files/figure-gfm/unnamed-chunk-3-1.png" width="100%" />
 
 Az ötlet a következő: mi van akkor, ha valaki megsúgja nekünk, hogy a
 magyar kiérkezési idők lognormális eloszlást követnek? Első ránézésre
@@ -434,7 +461,7 @@ időfaktorú a kórkép (tipikusan: újraélesztés). Itt így alakult a becsül
 90. percentilis (a különböző színek a különböző becslési
 megközelítéseket mutatják, ahogy fent is szerepelt):
 
-<img src="README_files/figure-gfm/unnamed-chunk-3-1.png" width="100%" />
+<img src="README_files/figure-gfm/unnamed-chunk-4-1.png" width="100%" />
 
 A vizsgált időszak vége felé országosan 19-23 perc körül, Budapesten
 17-25 perc körül alakult a becsült 90. percentilis a Kiemelt P1
@@ -443,7 +470,7 @@ becslési módszertől).
 
 A becsült 15 percen belüli kiérkezési arány:
 
-<img src="README_files/figure-gfm/unnamed-chunk-4-1.png" width="100%" />
+<img src="README_files/figure-gfm/unnamed-chunk-5-1.png" width="100%" />
 
 A vizsgált időszak vége felé országosan 70-80% körül, Budapesten 65-80%
 körül alakult a becsült 15 percen belüli kiérkezési arány a Kiemelt P1
@@ -459,7 +486,7 @@ trauma, zajló görcsroham, végtagamputáció, súlyos égés, a legmagasabb
 időfaktorú esetek kivételével). Itt így alakult a becsült 90.
 percentilis:
 
-<img src="README_files/figure-gfm/unnamed-chunk-5-1.png" width="100%" />
+<img src="README_files/figure-gfm/unnamed-chunk-6-1.png" width="100%" />
 
 A vizsgált időszak vége felé országosan 22-27 perc körül, Budapesten
 25-30 perc körül alakult a becsült 90. percentilis a P1 prioritási
@@ -468,7 +495,7 @@ módszertől).
 
 A becsült 15 percen belüli kiérkezési arány:
 
-<img src="README_files/figure-gfm/unnamed-chunk-6-1.png" width="100%" />
+<img src="README_files/figure-gfm/unnamed-chunk-7-1.png" width="100%" />
 
 A vizsgált időszak vége felé országosan 60-70% körül, Budapesten 55-60%
 körül alakult a becsült 15 percen belüli kiérkezési arány a P1
@@ -483,7 +510,7 @@ légúti idegentest nehézlégzés nélkül, közepesfokú égés, vérhányás,
 hirtelen látás- vagy hallásvesztés). Itt így alakult a becsült 90.
 percentilis:
 
-<img src="README_files/figure-gfm/unnamed-chunk-7-1.png" width="100%" />
+<img src="README_files/figure-gfm/unnamed-chunk-8-1.png" width="100%" />
 
 A vizsgált időszak vége felé országosan 40-45 perc körül, Budapesten
 60-70 perc körül alakult a becsült 90. percentilis a P2 prioritási
@@ -492,7 +519,7 @@ módszertől).
 
 A becsült 15 percen belüli kiérkezési arány:
 
-<img src="README_files/figure-gfm/unnamed-chunk-8-1.png" width="100%" />
+<img src="README_files/figure-gfm/unnamed-chunk-9-1.png" width="100%" />
 
 A vizsgált időszak vége felé országosan 45% körül, Budapesten 20-30%
 körül alakult a becsült 15 percen belüli kiérkezési arány a P2
@@ -776,13 +803,13 @@ t.test(rgamma(1e6, 2.3, 1.45))
     ##  One Sample t-test
     ## 
     ## data:  rgamma(1e+06, 2.3, 1.45)
-    ## t = 1516, df = 1e+06, p-value < 2.2e-16
+    ## t = 1515.9, df = 1e+06, p-value < 2.2e-16
     ## alternative hypothesis: true mean is not equal to 0
     ## 95 percent confidence interval:
-    ##  1.583431 1.587531
+    ##  1.584488 1.588591
     ## sample estimates:
     ## mean of x 
-    ##  1.585481
+    ##   1.58654
 
 ``` r
 mgamma(c(2.3, 1.45))
@@ -798,13 +825,13 @@ t.test(rweibull(1e6, 1.85, 2.12))
     ##  One Sample t-test
     ## 
     ## data:  rweibull(1e+06, 1.85, 2.12)
-    ## t = 1783.7, df = 1e+06, p-value < 2.2e-16
+    ## t = 1783.4, df = 1e+06, p-value < 2.2e-16
     ## alternative hypothesis: true mean is not equal to 0
     ## 95 percent confidence interval:
-    ##  1.880364 1.884501
+    ##  1.881952 1.886093
     ## sample estimates:
     ## mean of x 
-    ##  1.882432
+    ##  1.884023
 
 ``` r
 mweibull(c(1.85, 2.12))
@@ -943,7 +970,7 @@ pairs(RawDataWide[, .(P90, P90lnorm, P90gamma, P90weibull,
       })
 ```
 
-<img src="README_files/figure-gfm/unnamed-chunk-28-1.png" width="100%" />
+<img src="README_files/figure-gfm/unnamed-chunk-29-1.png" width="100%" />
 
 Az eloszlásfüggvény-értékek:
 
@@ -956,7 +983,7 @@ pairs(RawDataWide[, .(CDF15, CDF15lnorm, CDF15gamma, CDF15weibull,
       })
 ```
 
-<img src="README_files/figure-gfm/unnamed-chunk-29-1.png" width="100%" />
+<img src="README_files/figure-gfm/unnamed-chunk-30-1.png" width="100%" />
 
 Kiváló! (Ami természetesen nem azt jelenti, hogy maguk a becslések jók,
 hiszen ez azon a problémán nem segít, hogy az eloszlást nem ismerjük, de
@@ -1191,9 +1218,27 @@ Research Part C: Emerging Technologies* 65: 97–110.
     ingadozású lesz a becslése. De ez egyáltalán nem meglepő, ha arra
     gondolunk, hogy az egyre nagyobb percentilissel egyre közelebb
     kerülünk a maximumhoz – amiről már kezdetben megmondtuk, hogy nagyon
-    ingadozó! (Voltaképp a maximum nem más, mint a 100. percentilis.)
-    Ilyen értelemben a 90. percentilis választása egyfajta
-    kompromisszum: már eléggé az eloszlás szélét jellemzi, de azért még
-    nem nagyon rossz a becsülhetősége. Egyfajta „jól becsülhető
-    majdnem-maximum”. Nem szó szerint maximum, a legszél, ebből kicsit
-    engedünk, de cserében sokkal stabilabban becsülhető.
+    ingadozó! (A maximum igazából a 100. percentilis.) Ilyen értelemben
+    a 90. percentilis választása egyfajta kompromisszum: már eléggé az
+    eloszlás szélét jellemzi, de azért még nem nagyon rossz a
+    becsülhetősége. Egyfajta „jól becsülhető majdnem-maximum”. Nem szó
+    szerint maximum, a legszél, ebből kicsit engedünk, de cserében
+    sokkal stabilabban becsülhető.
+
+[^7]: Angolul az eloszlásfüggvény neve cumulative distribution function,
+    amit általánosan CDF-fel rövidítenek.
+
+[^8]: Joggal vethető fel, hogy miért pont 15 percet nézünk – ez nem egy
+    teljesen hasraütésszerű szám? Lehetne erre azt válaszolni, hogy nem,
+    lásd a korábban emlegetett minőségi standardokat, de valójában
+    tényleg van benne önkényesség, aligha lehet megindokolni, hogy mivel
+    jobb, mintha 14 vagy 16 percet vettünk volna. De ha meggondoljuk ez
+    a percentilisre is igaz: miért pont 90. percentilist nézzük és nem a
+    89. vagy 91. percentilist? Igazából tehát ilyen szempontból nincs
+    különbség a két megközelítés között. Természetesen még
+    informatívabb, ha megadjuk nem *csak* 15 percre, hanem 14 és 16
+    percre is – nem csak a 90. percentilist közöljük, hanem a 89.-et és
+    a 91.-et is – de egyrészt ezzel elveszítjük azt, hogy egyetlen
+    számba sűrített mutatónk van, másrészt, ha továbbvisszük a
+    gondolatot, akkor végeredményben kilyukadunk oda, hogy plottoljuk ki
+    az egész eloszlásfüggvényt (vagy épp a hisztogramot).
