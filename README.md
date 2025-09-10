@@ -395,12 +395,13 @@ szakaszban.
 
 És ezzel: meg is vagyunk. Ha ugyanis tudjuk teljesen pontosan a konkrét
 eloszlást, akkor onnantól *bármit* könnyedén kiszámolhatunk arra
-vonatkozóan – például a 90. percentilist is! És ezzel végeztünk is,
-ezzel a módszerrel megvan a nem közölt 90. percentilis. Elsőként (a
-súgás alapján) tekintünk egy eloszláscsaládot, utána a közölt átlag és
-medián alapján meghatározzuk a konkrét eloszlást az eloszláscsaládon
-belül, végül pedig, ha már egyszer megvan a konkrét eloszlás, lekérjük
-annak a 90. percentilisét.
+vonatkozóan – például a 90. percentilist is! (Vagy épp a 15 percen
+belüli kiérkezések arányát.) És ezzel végeztünk is, ezzel a módszerrel
+megvan a nem közölt 90. percentilis. Elsőként (a súgás alapján)
+tekintünk egy eloszláscsaládot, utána a közölt átlag és medián alapján
+meghatározzuk a konkrét eloszlást az eloszláscsaládon belül, végül
+pedig, ha már egyszer megvan a konkrét eloszlás, lekérjük annak a 90.
+percentilisét, vagy épp a 15 percen belüli kiérkezések arányát.
 
 Az egyetlen bökkenő a fenti okfejtésben a súgás. A valóságban ugyanis
 sajnos senki nem súgja meg nekünk, hogy mi az eloszláscsalád, azaz ez
