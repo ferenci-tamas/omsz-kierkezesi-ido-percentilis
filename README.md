@@ -600,21 +600,21 @@ egész egészségügyben. De ne feledkezzünk meg a múltról sem, hiszen ez az
 adatközlés egy egészen különleges lehetőséget teremt: így utólag, ha
 másfél évvel később is, de meg tudjuk nézni, hogy mennyire is voltak jók
 a becslések! (A most kiadott adatok 2021 júniussal indulnak, tehát bőven
-van átfedő időtartam azzal, amire én a becsléseket készítettem.) Persze,
-ez *elvileg* mindegy: lépten-nyomon hangsúlyoztam, hogy ha a becsléseim
-véletlenül nem jók, akkor sincsen semmi baj, mert az OMSZ ezt egy
-pillanat alatt tisztázhatja azzal, hogy kiadja a valódi értékeket. (Az
-már egészen más, nem statisztikai lapra tartozik, hogy az OMSZ sem azt
-nem volt hajlandó mondani annak idején, hogy jók a becsléseim, sem azt,
-hogy rosszak, csak azt, hogy el az ártó kezekkel az életmentőktől.) De
-persze, nem fogom letagadni, rendkívül kíváncsi lettem, hogy azért
-mennyire is jók.
+van átfedő időtartam azzal, amire én a becsléseket készítettem annak
+idején.) Persze, ez *elvileg* mindegy: lépten-nyomon hangsúlyoztam, hogy
+ha a becsléseim véletlenül nem jók, akkor sincsen semmi baj, mert az
+OMSZ ezt egy pillanat alatt tisztázhatja azzal, hogy kiadja a valódi
+értékeket. (Az már egészen más, nem statisztikai lapra tartozik, hogy az
+OMSZ sem azt nem volt hajlandó mondani annak idején, hogy jók a
+becsléseim, sem azt, hogy rosszak, csak azt, hogy el az ártó kezekkel az
+életmentőktől.) De persze, nem fogom letagadni, rendkívül kíváncsi
+lettem, hogy azért mennyire is jók.
 
 A becslések jósága azon múlik, hogy mennyire választunk jó eloszlást a
 kiérkezési idők feltételezett eloszlásaként. Azt írtam annak idején,
 hogy „legjobban a lognormális alátámasztott, ezért használom én is azt
 elsődlegesen” – most kiderült, hogy ezzel beletrafáltam, ugyanis valóban
-a lognormális bizonyult a legjobbnak! (Az persze az adatok birtokában
+a lognormális bizonyult a legjobbnak! (Az persze adatok birtokában
 önmagában is egy vizsgálható kérdés, hogy mi a valódi eloszlás,
 remélhetőleg azonban ennek vizsgálatára innentől nem lesz szükség,
 legalábbis eltitkolt adatok becsléséhez nem.) Úgyhogy a következőkben az
@@ -622,7 +622,8 @@ ezzel elért eredményeket fogom bemutatni.
 
 Első lépésben nézzük meg a talán legizgalmasabb kérdést: az országos,
 Kiemelt P1 prioritásra vonatkozó adatokat. Íme, másfél év elteltével,
-jöjjön akkor az igazság pillanata:
+jöjjön akkor az igazság pillanata (piros a korábbi becslés, türkiz a
+most kiadott tényadat):
 
 <img src="README_files/figure-gfm/unnamed-chunk-11-1.png" alt="" width="100%" />
 
@@ -655,7 +656,7 @@ mint az, hogy ki mit lát egy ábrán.
 Egy adott időpontra nincs különösebb probléma: van egy tényadat, van egy
 becsült adat, és a kettő különbsége a hiba. A probléma az, hogy mi az
 időintervallum *egészére* szeretnénk egy jellemző számot mondani –
-lényegében tehát összesítenünk kell az (időpontonkénti) hibákat, egy
+lényegében tehát összesítenünk kell az – időpontonkénti – hibákat, egy
 számba kell őket sűrítenünk. (Ezért lesz információtömörítés.) Mi
 érdekel minket? A közepes hibázás? Akkor ez egy ugyanolyan
 középérték-számolási feladat, mint magukra a kiérkezési időkre, csak
@@ -678,24 +679,25 @@ amikor a becslések nem egyszerűen ingadoznak a jó érték körül, hanem
 tendenciózusan inkább alatta, vagy inkább felette vannak. Ha az előjeles
 hibákat átlagoljuk ki, akkor az pontosan ezt fogja megmutatni[^9]: ha 0
 az átlag, attól még lehet bármekkora hiba (lásd a
-statisztikus-vicceket), de az elmondható, hogy szisztematikus eltérés
-nincs! Ha viszont nem nulla, akkor van szisztematikus alá- vagy
+statisztikus-vicceket), de legalább az elmondható, hogy szisztematikus
+eltérés nincs! Ha viszont nem nulla, akkor van szisztematikus alá- vagy
 fölébecslés is. Ezt szokták a statisztikusok *torzításnak* nevezni.
 
 Még egyetlen kérdés vethető fel ezekkel az mérőszámokkal kapcsolatban:
 az, hogy abszolút jellegűek. Ha 1 perc helyett 2 a becslésünk, az is 1
 perc hiba, ha 1000 perc helyett 1001 perc, az is 1 perc hiba. Hogy ez
-baj-e? Erre a kérdésre nem lehet válaszolni, mert az alkalmazási
-területtől függ[^10]. Itt mindenesetre megadom a relatív hibákat is:
-vesszük a fenti hibázást, tehát a valódi és a becsült érték különbségét,
-majd azt elosztjuk a valódi értékkel, így kapjuk a relatív hibát. Ezek
-átlagát általában MPE-vel rövidítik (az angol mean percentage
-error-ból), ez felel meg a torzításnak, csak relatív értelemben, ha
-pedig az abszolút értékeket átlagoljuk, hogy itt se számítson az eltérés
-iránya, akkkor a MAPE-nak (mean absolute percentage error) rövidített
-mérőszámot kapjuk. (Ezeknek azért elég sok problémájuk van, például
-gondoljunk bele, nem szimmetrikusak: ha 10 helyett 5-öt becslünk, az
-nagyobb hiba mintha 15-öt.)
+baj-e? Erre a kérdésre nem lehet általánosságban válaszolni, mert az
+alkalmazási területtől függ[^10]. Itt mindenesetre megadom a relatív
+hibákat, tehát a százalékos tévedést is: vesszük a fenti hibázást, tehát
+a valódi és a becsült érték különbségét, majd azt elosztjuk a valódi
+értékkel, így kapjuk a relatív hibát. Ezek átlagát általában MPE-vel
+rövidítik (az angol mean percentage error-ból), ez felel meg a
+torzításnak csak relatív értelemben, ha pedig az abszolút értékeket
+átlagoljuk, hogy itt se számítson az eltérés iránya, akkkor a MAPE-nak
+(mean absolute percentage error) nevezett mérőszámot kapjuk. (Ezeknek
+azért elég sok problémájuk van, például gondoljunk bele, nem
+szimmetrikusak: ha 10 helyett 5-öt becslünk, az nagyobb hiba mintha
+15-öt.)
 
 Én most mindkét típusú hibázást megadom:
 
