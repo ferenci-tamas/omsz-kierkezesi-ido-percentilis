@@ -2,7 +2,7 @@ Az Országos Mentőszolgálat kiérkezési statisztikáinak vizsgálata: a 90.
 percentilis és a 15 percen belüli kiérkezési arány becslése
 ================
 Ferenci Tamás (<https://www.medstat.hu/>)<br>
-2025. szeptember 10.
+2026. július 30.
 
 - [Összefoglaló](#összefoglaló)
 - [Bevezetés](#bevezetés)
@@ -13,7 +13,10 @@ Ferenci Tamás (<https://www.medstat.hu/>)<br>
   - [Kiemelt P1 prioritás](#kiemelt-p1-prioritás)
   - [P1 prioritás](#p1-prioritás)
   - [P2 prioritás](#p2-prioritás)
-  - [Záró megjegyzés](#záró-megjegyzés)
+- [Záró megjegyzés](#záró-megjegyzés)
+- [Utóirat: összevetés a – másfél évvel később kiadott –
+  tényadatokkal](#utóirat-összevetés-a--másfél-évvel-később-kiadott--tényadatokkal)
+- [Utóirat az utóirathoz](#utóirat-az-utóirathoz)
 - [Módszertani részletek](#módszertani-részletek)
   - [Felhasznált eloszlások](#felhasznált-eloszlások)
   - [Számítástechnikai részletek](#számítástechnikai-részletek)
@@ -97,9 +100,47 @@ Ferenci Tamás (<https://www.medstat.hu/>)<br>
   OMSZ egy pillanat alatt tisztázhatja azzal, hogy közli a tényadatokat.
 - A fenti eredményeimet közlő egyik internetes portál hosszas
   levelezésbe kezdett az OMSZ-szal. E levélváltás statisztikai
-  relevanciája ugyan csekély, mégis melegen ajánlom [az
+  relevanciája ugyan csekély, mégis *melegen ajánlom* [az
   elolvasását](https://telex.hu/belfold/2025/02/18/orszagos-mentoszolgalat-omsz-mentok-kierkezesi-idok-kunetz-zsombor-ferenci-tamas-gyorfi-pal-levelezes-transzparencia-adatok),
-  mert *nagyon* tanulságos.
+  mert *nagyon* tanulságos. Már a cikk címe is sokat mond: „Részletes
+  kérdéseket küldtünk a mentőszolgálatnak a kiérkezési időkről. A
+  válasz: El az ártó kezekkel az életmentőktől!”…
+- A fenti történet után másfél évvel, 2026. júniusában távozott az OMSZ
+  főigazgatója, majd nem sokkal rá a kommunikációs igazgató is. Az új
+  vezetés pedig a jelek szerint nagyon máshogy áll a transzparencia
+  kérdéséhez: 2026. július 30-án a blog, ami az eredeti adatkérést is
+  közzétette, egyszercsak minden további nélkül megkapta a 90.
+  percentilisre vonatkozó adatokat.
+- Ez hatalmas örömhír, és rendkívül biztató a jövőre nézve, ha ez a
+  felfogás és hozzáállás válik uralkodóvá az OMSZ-on belül, még jobb
+  esetben az egész egészségügyben. De ne feledkezzünk meg a múltról sem,
+  hiszen ez az adatközlés egy egészen különleges lehetőséget teremt: így
+  utólag, ha másfél évvel később is, de meg tudjuk nézni, hogy mennyire
+  is voltak jók a becslések! Persze, ez *elvileg* mindegy: lépten-nyomon
+  hangsúlyoztam, hogy ha a becsléseim véletlenül nem jók, akkor sincsen
+  semmi baj, mert az OMSZ ezt egy pillanat alatt tisztázhatja azzal,
+  hogy kiadja a valódi értékeket. (Az már egészen más, nem statisztikai
+  lapra tartozik, hogy az OMSZ sem azt nem volt hajlandó mondani annak
+  idején, hogy jók a becsléseim, sem azt, hogy rosszak, csak azt, hogy
+  el az ártó kezekkel az életmentőktől.) De persze, nem fogom letagadni,
+  rendkívül kíváncsi lettem, hogy azért mennyire is jók.
+- A talán legfontosabb kategóriában, a Kiemelt P1 prioritás országos
+  adatában 0,6 perc volt a becslésem átlagos tévedése (3,4% hiba).
+  Semelyik kategóriában nem volt nagyobb az átlagos hibám mint 2 perc, a
+  relatív hiba minden esetben kisebb volt mint 11%. Bár az előbbi
+  mondatokat egyes szám első személyben írtam, ezek az eredmények
+  természetesen nem a személyemet dicsérik, hanem azt, hogy a kiérkezési
+  idők valóban szépen illeszkednek a számításaimban feltételezett
+  eloszlásra.
+- Az OMSZ az adatokat Excel-táblában adta ki, és 2021-től kezdve. Tehát,
+  amint azt pontosan lehetett már akkor is sejteni, szó nincs arról,
+  hogy nekik az átlag és a medián csak rossz minőségben szkennelt
+  képfájlként van meg, és szó nincs arról, hogy a percentilissel meg nem
+  is rendelkeznek és azt kiszámítani sem tudják. Vagyis, miközben
+  leírták azokat a mondatokat, hogy lejáratókampány meg el az ártó
+  kezekkel az életmentőktől, ők mindvégig pontosan tudták, hogy
+  egyébként igazam van, és az összes becslésem 1-2 perc pontosságon
+  belül stimmel.
 
 ## Bevezetés
 
@@ -158,7 +199,7 @@ kiérkezési idők. Szóródás még adott prioritáson *belül* is van.) Szóva
 ez nem egyetlen érték, hanem – szép szóval élve – eloszlása van.
 Kinézhet például így:
 
-<img src="README_files/figure-gfm/unnamed-chunk-1-1.png" width="100%" />
+<img src="README_files/figure-gfm/unnamed-chunk-1-1.png" alt="" width="100%" />
 
 Ez egy képzeletbeli példa (az adatokat én szimuláltam), ami azt mutatja,
 hogy 10 ezer mentőállátásból hány történt adott időablakon belül (5
@@ -179,26 +220,26 @@ idő; ennek jellemzésére a két legismertebb mutató az átlag és a
 medián[^1].
 
 Az **átlag** a kiérkezési idők összege osztva azzal, hogy hány
-kiérkezésről beszélünk; lényegében tehát megadja, hogy ha tényleg
-mindenkihez ugyanannyi idő alatt ért volna ki a mentő, akkor az hány
-perc volna ha közben a kiérkezési idők összege állandó maradna. (Azt is
-mondhatnánk, hogy ha az összes kiérkezési időt egyenletesen elosztanánk,
-akkor mennyi jutna egy esetre.) Az átlag közismert, könnyen értelmezhető
-és egy sor előnyös tulajdonsággal bíró mutató. Van azonban néhány
-jellemző problémája is, ezeket részletesen tárgyalja az
+kiérkezésről beszélünk; lényegében tehát megadja, hogy ha mindenkihez
+ugyanannyi idő alatt ért volna ki a mentő, akkor az hány perc volna ha
+közben a kiérkezési idők összege állandó maradna. Azt is mondhatnánk,
+hogy ha az összes kiérkezési időt egyenletesen elosztanánk, akkor mennyi
+jutna egy esetre. Az átlag közismert, könnyen értelmezhető és egy sor
+előnyös tulajdonsággal bíró mutató. Van azonban néhány jellemző
+problémája is, ezeket részletesen tárgyalja az
 [irodalom](https://ferenci-tamas.github.io/biostatisztika/deskriptiv.html#sec-kozepertekek),
 itt most csak annyit említek meg, hogy érzékeny a kilógó értékekre: ha
 van – akár csak kis számú – de a többitől lényegesen eltérő érték, akkor
 azok „elhúzzák” az átlagot maguk felé, ami miatt az többé már nem igazán
 „közepes” érték lesz. Ez a probléma nem csak akkor jelentkezik, ha
 valamilyen adatbeviteli hiba van, hanem például jelen esetben is, mert a
-fenti eloszlás nem szimmetrikus, a statisztikusok úgy mondják: ferde az
-eloszlás, mert az egyik irányban van egy szigorú korlátja (0 perc alá
-nem mehet a kiérkezési idő), a másik irányban viszont szabadon tud
+fenti eloszlás nem szimmetrikus (a statisztikusok úgy mondják: ferde az
+eloszlás), mert az egyik irányban van egy szigorú korlátja, 0 perc alá
+nem mehet a kiérkezési idő, a másik irányban viszont szabadon tud
 szóródni. A dolog végeredménye, hogy felfelé, ha nem is gyakran, de
 előfordulnak a többitől nagyobb, akár lényegesen nagyobb értékek, amit
 nem tudnak ellensúlyozni a másik irányban kilógó értékek, hiszen a
-kiérkezési idő 0 alá nem mehet. A fenti példában az átlag 13.9 perc.
+kiérkezési idő 0 alá nem mehet le. A fenti példában az átlag 13.9 perc.
 Közepes érték ez? Ez nem igazán jó kérdés, mert hát mi az, hogy
 „közepes”, de az mindenesetre elmondható, hogy az esetek 59.4%-a kisebb
 ennél! Sokan vitatkoznának, hogy mennyire „közepes” ez a kiérkezési idő,
@@ -294,15 +335,15 @@ pontjából](https://www.england.nhs.uk/statistics/wp-content/uploads/sites/2/20
 ki is derül; most megint megjegyezhetném, hogy ilyet hol találunk a
 magyar mentőszolgálat honlapján…
 
-Továbbmenve, a széli viselkedés másik tipikus mutatója az, hogy milyen
-arányban ér ki a mentő adott időn, például 15 percen belül. E mutató
-tartalmának, és a percentilissel való kapcsolatának jobb megértéséhez
-érdemes az ún. eloszlásfüggvényt tekinteni: az **eloszlásfüggvény**
-megmutatja, hogy az esetek mekkora részéhez érnek ki adott időn belül.
-Ugyanazon – szimulált – adatoknak, amikből az előző ábra készült, így
-néz ki az eloszlásfüggvénye:
+A széli viselkedés másik tipikus mutatója az, hogy milyen arányban ér ki
+a mentő adott időn, például 15 percen belül. E mutató tartalmának, és a
+percentilissel való kapcsolatának jobb megértéséhez érdemes az ún.
+eloszlásfüggvényt tekinteni: az **eloszlásfüggvény** megmutatja, hogy az
+esetek mekkora részéhez érnek ki adott időn belül. Ugyanazon – szimulált
+– adatoknak, amikből az előző ábra készült, így néz ki az
+eloszlásfüggvénye:
 
-<img src="README_files/figure-gfm/unnamed-chunk-2-1.png" width="100%" />
+<img src="README_files/figure-gfm/unnamed-chunk-2-1.png" alt="" width="100%" />
 
 A fenti ábrán látható mind a 90. percentilis (rövidítés: P90), mind a 15
 percen belüli kiérkezési arány (rövidítés: CDF15[^7]) számítása
@@ -371,7 +412,7 @@ széthúzható, ilyenekre kell gondolni. Példának okáért, van egy nevezetes
 eloszlás, a lognormális eloszlás, aminek kinézetét a következő ábra
 mutatja néhány különböző paraméter mellett:
 
-<img src="README_files/figure-gfm/unnamed-chunk-3-1.png" width="100%" />
+<img src="README_files/figure-gfm/unnamed-chunk-3-1.png" alt="" width="100%" />
 
 Az ötlet a következő: mi van akkor, ha valaki megsúgja nekünk, hogy a
 magyar kiérkezési idők lognormális eloszlást követnek? Első ránézésre
@@ -393,43 +434,44 @@ súgás, tehát, hogy *valamilyen* lognormálist követ, kellett!) Nem túl
 bonyolult a konkrét kiszámolása sem, ezt szintén megmutatom a következő
 szakaszban.
 
-És ezzel: meg is vagyunk. Ha ugyanis tudjuk teljesen pontosan a konkrét
+És ezzel meg is vagyunk. Ha ugyanis tudjuk teljesen pontosan a konkrét
 eloszlást, akkor onnantól *bármit* könnyedén kiszámolhatunk arra
-vonatkozóan – például a 90. percentilist is! (Vagy épp a 15 percen
-belüli kiérkezések arányát.) És ezzel végeztünk is, ezzel a módszerrel
-megvan a nem közölt 90. percentilis. Elsőként (a súgás alapján)
-tekintünk egy eloszláscsaládot, utána a közölt átlag és medián alapján
-meghatározzuk a konkrét eloszlást az eloszláscsaládon belül, végül
-pedig, ha már egyszer megvan a konkrét eloszlás, lekérjük annak a 90.
-percentilisét, vagy épp a 15 percen belüli kiérkezések arányát.
+vonatkozóan – például a 90. percentilist is! Vagy épp a 15 percen belüli
+kiérkezések arányát. Azaz végeztünk, ezzel a módszerrel megvannak a nem
+közölt adatok. Elsőként (a súgás alapján) tekintünk egy
+eloszláscsaládot, utána a közölt átlag és medián alapján meghatározzuk a
+konkrét eloszlást az eloszláscsaládon belül, végül pedig, ha már egyszer
+megvan a konkrét eloszlás, lekérjük annak a 90. percentilisét, vagy épp
+a 15 percen belüli kiérkezések arányát.
 
 Az egyetlen bökkenő a fenti okfejtésben a súgás. A valóságban ugyanis
 sajnos senki nem súgja meg nekünk, hogy mi az eloszláscsalád, azaz ez
-innentől egy *feltevés* lesz – de szerencsére elég észszerű feltevés.
-Egyrészt azért, mert statisztikai megfontolások alapján az ilyen jellegű
-adatoknak ez általában jó modellje. (Például, és ezt a fenti ábra is
-szemlélteti, a lognormális eloszlásnak 0 alsó korlátja, és az eloszlás
-ferde – mindkettő pont olyan, mint a kiérkezési időknél várjuk!
-Egyébként a lognormálist általában is használják bármiféle utazási idő
-eloszlásának leírására.) A másik ok, hogy bár magyar adataink nincsenek,
-de az irodalomban fellelhetőek erre vonatkozó eredmények: kutatók,
+innentől egy *feltevés* lesz – de szerencsére a fent bemutatott
+lognormális eloszlás elég észszerű feltevés. Egyrészt azért, mert
+statisztikai megfontolások alapján az ilyen jellegű adatoknak ez
+általában jó modellje. (Például, és ezt a fenti ábra is szemlélteti, a
+lognormális eloszlásnak 0 alsó korlátja, és az eloszlás ferde –
+mindkettő pont olyan, mint a kiérkezési időknél várjuk. Egyébként a
+lognormálist általában is használják bármiféle utazási idő eloszlásának
+leírására.) A másik ok, hogy bár magyar adataink nincsenek, de az
+irodalomban fellelhetőek erre vonatkozó nemzetközi eredmények: kutatók,
 akinek volt hozzáférésük egyesével a kiérkezési időkhöz, megnézték, hogy
 milyen eloszlás passzol rájuk, és van rá közlésünk, ahol azt találták,
 hogy a lognormális. Ez is megnöveli a bizalmunkat ebben.
 
 Még egy dolgot teszek, hogy növeljem az eredmények robusztusságát: nem
 csak egyféle eloszláscsaládot használok. A lognormális mellett
-végigszámolom a dolgot még néhány további, szintén szóba jövő
-eloszlással. Ha ugyanis azt kapjuk, hogy az eredmények nagyjából
-hasonlóak, az szintén megnöveli bennük a bizalmunkat, hiszen azt
-jelenti, hogy a kapott érték nem függ nagyon attól, hogy konkrétan
-milyen az eloszlás – ami jó hír, hiszen ezt végső soron nem tudhatjuk.
-Az eredmények között ezért fog nem csak a lognormális, hanem több egyéb
-név is megjelenni. Ezek tartománya mutatja azt a bizonytalanságot, ami
-abból fakad, hogy nem tudjuk pontosan melyik eloszlás érvényes; de
-szerencsére, mint majd látni fogjuk, elég közel futnak egymáshoz.
-Természetesen ez azon nem segít, ha valamilyen teljesen más eloszlás
-érvényes.
+végigszámolom a dolgot még néhány további, de szintén realisztikus,
+ilyen adatokra szóba jövő eloszlással. Ha ugyanis azt kapjuk, hogy az
+eredmények nagyjából hasonlóak, az szintén megnöveli bennük a
+bizalmunkat, hiszen azt jelenti, hogy a kapott érték nem függ nagyon
+attól, hogy konkrétan milyen az eloszlás – ami jó hír, hiszen ezt végső
+soron nem tudhatjuk. Az eredmények között ezért fog nem csak a
+lognormális, hanem több egyéb név is megjelenni. Ezek tartománya mutatja
+azt a bizonytalanságot, ami abból fakad, hogy nem tudjuk pontosan melyik
+eloszlás érvényes; de szerencsére, mint majd látni fogjuk, elég közel
+futnak egymáshoz. Természetesen ez azon nem segít, ha valamilyen
+teljesen más eloszlás érvényes.
 
 Szerencsére ez mind statisztikai megfontolások, mind szakirodalmi adatok
 alapján nem túl valószínű, így a kapott becslések jól védhetőek, de
@@ -462,7 +504,7 @@ időfaktorú a kórkép (tipikusan: újraélesztés). Itt így alakult a becsül
 90. percentilis (a különböző színek a különböző becslési
 megközelítéseket mutatják, ahogy fent is szerepelt):
 
-<img src="README_files/figure-gfm/unnamed-chunk-4-1.png" width="100%" />
+<img src="README_files/figure-gfm/unnamed-chunk-4-1.png" alt="" width="100%" />
 
 A vizsgált időszak vége felé országosan 19-23 perc körül, Budapesten
 17-25 perc körül alakult a becsült 90. percentilis a Kiemelt P1
@@ -471,7 +513,7 @@ becslési módszertől).
 
 A becsült 15 percen belüli kiérkezési arány:
 
-<img src="README_files/figure-gfm/unnamed-chunk-5-1.png" width="100%" />
+<img src="README_files/figure-gfm/unnamed-chunk-5-1.png" alt="" width="100%" />
 
 A vizsgált időszak vége felé országosan 70-80% körül, Budapesten 65-80%
 körül alakult a becsült 15 percen belüli kiérkezési arány a Kiemelt P1
@@ -487,7 +529,7 @@ trauma, zajló görcsroham, végtagamputáció, súlyos égés, a legmagasabb
 időfaktorú esetek kivételével). Itt így alakult a becsült 90.
 percentilis:
 
-<img src="README_files/figure-gfm/unnamed-chunk-6-1.png" width="100%" />
+<img src="README_files/figure-gfm/unnamed-chunk-6-1.png" alt="" width="100%" />
 
 A vizsgált időszak vége felé országosan 22-27 perc körül, Budapesten
 25-30 perc körül alakult a becsült 90. percentilis a P1 prioritási
@@ -496,7 +538,7 @@ módszertől).
 
 A becsült 15 percen belüli kiérkezési arány:
 
-<img src="README_files/figure-gfm/unnamed-chunk-7-1.png" width="100%" />
+<img src="README_files/figure-gfm/unnamed-chunk-7-1.png" alt="" width="100%" />
 
 A vizsgált időszak vége felé országosan 60-70% körül, Budapesten 55-60%
 körül alakult a becsült 15 percen belüli kiérkezési arány a P1
@@ -511,7 +553,7 @@ légúti idegentest nehézlégzés nélkül, közepesfokú égés, vérhányás,
 hirtelen látás- vagy hallásvesztés). Itt így alakult a becsült 90.
 percentilis:
 
-<img src="README_files/figure-gfm/unnamed-chunk-8-1.png" width="100%" />
+<img src="README_files/figure-gfm/unnamed-chunk-8-1.png" alt="" width="100%" />
 
 A vizsgált időszak vége felé országosan 40-45 perc körül, Budapesten
 60-70 perc körül alakult a becsült 90. percentilis a P2 prioritási
@@ -520,20 +562,169 @@ módszertől).
 
 A becsült 15 percen belüli kiérkezési arány:
 
-<img src="README_files/figure-gfm/unnamed-chunk-9-1.png" width="100%" />
+<img src="README_files/figure-gfm/unnamed-chunk-9-1.png" alt="" width="100%" />
 
 A vizsgált időszak vége felé országosan 45% körül, Budapesten 20-30%
 körül alakult a becsült 15 percen belüli kiérkezési arány a P2
 prioritási kategóriában (függően a konkrét hónaptól és az alkalmazott
 becslési módszertől).
 
-### Záró megjegyzés
+## Záró megjegyzés
 
 A fenti eredményeimet közlő egyik internetes portál hosszas levelezésbe
 kezdett az OMSZ-szal. E levélváltás statisztikai relevanciája ugyan
-csekély, mégis melegen ajánlom [az
+csekély, mégis *melegen ajánlom* [az
 elolvasását](https://telex.hu/belfold/2025/02/18/orszagos-mentoszolgalat-omsz-mentok-kierkezesi-idok-kunetz-zsombor-ferenci-tamas-gyorfi-pal-levelezes-transzparencia-adatok),
-mert *nagyon* tanulságos.
+mert *nagyon* tanulságos. Már a cikk címe is sokat mond: „Részletes
+kérdéseket küldtünk a mentőszolgálatnak a kiérkezési időkről. A válasz:
+El az ártó kezekkel az életmentőktől!”…
+
+## Utóirat: összevetés a – másfél évvel később kiadott – tényadatokkal
+
+A fenti történet után másfél évvel, 2026. júniusában távozott az OMSZ
+[főigazgatója](https://www.mentok.hu/foigazgato-valtas-az-orszagos-mentoszolgalatnal/),
+majd nem sokkal rá a [kommunikációs
+igazgató](https://www.mentok.hu/uj-szovivo-az-orszagos-mentoszolgalatnal/)
+is. Az új vezetés pedig a jelek szerint nagyon máshogy áll a
+transzparencia kérdéséhez: 2026. július 30-án a blog, ami az eredeti
+adatkérést is közzétette, egyszercsak minden további nélkül
+[megkapta](https://www.facebook.com/zskunetz/posts/pfbid0J5h38o2PfBbNLT85zSiRG4pbQ4GptUtLTZYgjqyvQdkNoGQ57j99t1PbL7oUEwVzl)
+– kényelmes, gépi úton feldolgozható formában… – a 90. percentilisre
+vonatkozó, korábban szívósan visszatartott adatokat.
+
+Ez történelmi esemény – bármilyen szomorú is, hogy ilyet kell mondanom
+2026-ban egy ilyen az adatközlésre, de hazai viszonylat tényleg az.
+Hatalmas örömhír, és rendkívül biztató a jövőre nézve, ha ez a felfogás
+és hozzáállás válik uralkodóvá az OMSZ-on belül, még jobb esetben az
+egész egészségügyben. De ne feledkezzünk meg a múltról sem, hiszen ez az
+adatközlés egy egészen különleges lehetőséget teremt: így utólag, ha
+másfél évvel később is, de meg tudjuk nézni, hogy mennyire is voltak jók
+a becslések! (A most kiadott adatok 2021 júniussal indulnak, tehát bőven
+van átfedő időtartam azzal, amire én a becsléseket készítettem.) Persze,
+ez *elvileg* mindegy: lépten-nyomon hangsúlyoztam, hogy ha a becsléseim
+véletlenül nem jók, akkor sincsen semmi baj, mert az OMSZ ezt egy
+pillanat alatt tisztázhatja azzal, hogy kiadja a valódi értékeket. (Az
+már egészen más, nem statisztikai lapra tartozik, hogy az OMSZ sem azt
+nem volt hajlandó mondani annak idején, hogy jók a becsléseim, sem azt,
+hogy rosszak, csak azt, hogy el az ártó kezekkel az életmentőktől.) De
+persze, nem fogom letagadni, rendkívül kíváncsi lettem, hogy azért
+mennyire is jók.
+
+A becslések jósága azon múlik, hogy mennyire választunk jó eloszlást a
+kiérkezési idők feltételezett eloszlásaként. Azt írtam annak idején,
+hogy „legjobban a lognormális alátámasztott, ezért használom én is azt
+elsődlegesen” – most kiderült, hogy ezzel beletrafáltam, ugyanis valóban
+a lognormális bizonyult a legjobbnak! (Az persze az adatok birtokában
+önmagában is egy vizsgálható kérdés, hogy mi a valódi eloszlás,
+remélhetőleg azonban ennek vizsgálatára innentől nem lesz szükség,
+legalábbis eltitkolt adatok becsléséhez nem.) Úgyhogy a következőkben az
+ezzel elért eredményeket fogom bemutatni.
+
+Első lépésben nézzük meg a talán legizgalmasabb kérdést: az országos,
+Kiemelt P1 prioritásra vonatkozó adatokat. Íme, másfél év elteltével,
+jöjjön akkor az igazság pillanata:
+
+<img src="README_files/figure-gfm/unnamed-chunk-11-1.png" alt="" width="100%" />
+
+Így tehát már, utólag, de láthatjuk: a becsült adatok egészen kiválóan
+egyeznek a tényadatokkal. Az eltérések minimálisak, illetve, ami még
+fontos, hogy nem tendenciózusak: ezek a kis eltérések is olyanok, hogy
+hol alatta van a becslés a valós adatnak, hol felette.
+
+Nézzük meg most az összes többi prioritást és a területi lebontást is:
+
+<img src="README_files/figure-gfm/unnamed-chunk-12-1.png" alt="" width="100%" />
+
+Az, hogy a budapesti P2 és az országos P1 mennyire pontosan illeszkedik,
+egészen elképesztő (és ezzel nem a saját vállamat akarom megveregetni,
+hiszen a dolog azon múlt, hogy mennyire tökéletesen lognormális lett
+tényleg az eloszlás). Ezzel szemben az országos P2-t és a budapesti
+P1-et szisztematikusan fölébecsültem, de az előbbit csak marginálisan,
+az utóbbi viszont az összes elemzés egyetlen igazán említésre méltó
+hibája lett. Fontos, hogy ne felejtsük el, hogy a függőleges tengelyek
+skálázása más az egyes prioritásokban: az országos P2-ben látható
+eltérés valójában szinte pontosan ugyanakkora, mint a budapesti P1-ben
+(természetesen a *relatív* hiba tényleg az előbbiben kisebb). A kiemelt
+P1-ek becslése kissé több hibával terhelt, illetve Budapesten némileg
+szisztematikusan is fölébecsült, de a hibák itt is kicsik.
+
+Felmerül a kérdés, hogy tudjuk-e valamiképp számszerűen is jellemezni a
+hibázást – lehet, hogy ez információtömörítés, de cserében objektívebb,
+mint az, hogy ki mit lát egy ábrán.
+
+Egy adott időpontra nincs különösebb probléma: van egy tényadat, van egy
+becsült adat, és a kettő különbsége a hiba. A probléma az, hogy mi az
+időintervallum *egészére* szeretnénk egy jellemző számot mondani –
+lényegében tehát összesítenünk kell az (időpontonkénti) hibákat, egy
+számba kell őket sűrítenünk. (Ezért lesz információtömörítés.) Mi
+érdekel minket? A közepes hibázás? Akkor ez egy ugyanolyan
+középérték-számolási feladat, mint magukra a kiérkezési időkre, csak
+most a hibákra…!
+
+Egyetlen különbség van a hibák esetében: az előjel. Nem lehet például
+egyszerűen átlagot számolni, hiszen akkor jön a klasszikus statisztikai
+viccek helyzete, hogy ha eggyel fölé lövünk meg eggyel alá, akkor
+eltaláltuk – valóban, +1 és -1 átlaga nulla. A kézenfekvő megoldás, hogy
+egyszerűen ne törődjünk az előjellel, csak azt nézzük, hogy a becslés
+milyen távol van a valódi értéktől: ha 1-gyel kisebb a becslésünk mint a
+tényadat, az is 1 hiba, ha 1-gyel nagyobb, az is. Ha ezeket, magyarán az
+abszolút értékeket átlagoljuk ki, akkor kapjuk az *átlagos abszolút
+hibát*. Ez már jó mérőszáma lesz a hibázásnak.
+
+Mindettől függetlenül azonban van értelme az előjeles hibák
+kiátlagolásának is. Ezzel ugyanis egy másik dolgot tudunk megnézni: azt,
+hogy van-e szisztematikus alá- vagy fölébecslés. Azt értjük ez alatt,
+amikor a becslések nem egyszerűen ingadoznak a jó érték körül, hanem
+tendenciózusan inkább alatta, vagy inkább felette vannak. Ha az előjeles
+hibákat átlagoljuk ki, akkor az pontosan ezt fogja megmutatni[^9]: ha 0
+az átlag, attól még lehet bármekkora hiba (lásd a
+statisztikus-vicceket), de az elmondható, hogy szisztematikus eltérés
+nincs! Ha viszont nem nulla, akkor van szisztematikus alá- vagy
+fölébecslés is. Ezt szokták a statisztikusok *torzításnak* nevezni.
+
+Még egyetlen kérdés vethető fel ezekkel az mérőszámokkal kapcsolatban:
+az, hogy abszolút jellegűek. Ha 1 perc helyett 2 a becslésünk, az is 1
+perc hiba, ha 1000 perc helyett 1001 perc, az is 1 perc hiba. Hogy ez
+baj-e? Erre a kérdésre nem lehet válaszolni, mert az alkalmazási
+területtől függ[^10]. Itt mindenesetre megadom a relatív hibákat is:
+vesszük a fenti hibázást, tehát a valódi és a becsült érték különbségét,
+majd azt elosztjuk a valódi értékkel, így kapjuk a relatív hibát. Ezek
+átlagát általában MPE-vel rövidítik (az angol mean percentage
+error-ból), ez felel meg a torzításnak, csak relatív értelemben, ha
+pedig az abszolút értékeket átlagoljuk, hogy itt se számítson az eltérés
+iránya, akkkor a MAPE-nak (mean absolute percentage error) rövidített
+mérőszámot kapjuk. (Ezeknek azért elég sok problémájuk van, például
+gondoljunk bele, nem szimmetrikusak: ha 10 helyett 5-öt becslünk, az
+nagyobb hiba mintha 15-öt.)
+
+Én most mindkét típusú hibázást megadom:
+
+| Prioritás | Terület | Torzítás \[perc\] | Átlagos abszolút hiba \[perc\] | MPE \[%\] | MAPE \[%\] |
+|:---|:---|---:|---:|---:|---:|
+| Kiemelt P1 | Budapest | 1.7 | 1.9 | 9.6 | 10.8 |
+| Kiemelt P1 | Országos | 0.0 | 0.6 | 0.1 | 3.4 |
+| P1 | Budapest | 1.8 | 1.8 | 8.3 | 8.3 |
+| P1 | Országos | 0.1 | 0.3 | 0.4 | 1.6 |
+| P2 | Budapest | -0.8 | 1.0 | -1.0 | 1.3 |
+| P2 | Országos | 2.0 | 2.0 | 4.9 | 4.9 |
+
+Látható, hogy a becsléseim inkább kicsit magasabbak voltak, mint a
+tényadat, de a torzítás sehol nem nagyobb, mint 2 perc. Az átlagos
+abszolút hiba szintén minden esetben 2 perc, vagy az alatt maradt. A
+relatív hibák minden esetben kisebbek, mint 11%.
+
+## Utóirat az utóirathoz
+
+Az OMSZ az adatokat – természetesen – Excel-táblában adta ki, és –
+természetesen – 2021-től kezdve. Tehát, amint azt pontosan lehetett már
+akkor is sejteni, szó nincs arról, hogy nekik az átlag és a medián csak
+rossz minőségben szkennelt képfájlként van meg, ez kizárólag az
+adatfelhasználást igyekezett ellehetetleníteni, és szó nincs arról, hogy
+a percentilissel meg nem is rendelkeznek és azt kiszámítani sem tudják.
+Vagyis, miközben leírták azokat a mondatokat, hogy lejáratókampány meg
+el az ártó kezekkel az életmentőktől, ők mindvégig pontosan tudták, hogy
+egyébként igazam van, és az összes becslésem 1-2 perc pontosságon belül
+stimmel.
 
 ## Módszertani részletek
 
@@ -556,7 +747,7 @@ alátámasztásként):
 
 | Eloszlás | Irodalmi hivatkozás |
 |----|----|
-| Lognormális | ([Ingolfsson, Budge, és Erkut 2008](#ref-ingolfsson2008)), ([Pury 2021](#ref-pury2021)), ([Rastpour, Ingolfsson, és Kolfal 2020](#ref-rastpour2020)), ([Westgate és mtsai. 2016](#ref-westgate2016)), ([Aladdini 2010](#ref-aladdini2010)) |
+| Lognormális | ([Ingolfsson és mtsai. 2008](#ref-ingolfsson2008)), ([Pury 2021](#ref-pury2021)), ([Rastpour és mtsai. 2020](#ref-rastpour2020)), ([Westgate és mtsai. 2016](#ref-westgate2016)), ([Aladdini 2010](#ref-aladdini2010)) |
 | Inverz normális | ([Zhang és mtsai. 2016](#ref-zhang2016)) |
 | Weibull | ([Chong 2016](#ref-chong2016)) |
 | Gamma | ([Nelas és Dias 2020](#ref-nelas2020)) |
@@ -567,10 +758,10 @@ is azt elsődlegesen, a többit pedig robusztusság-vizsgálatra.
 Egy matematikai jellegű megjegyzést is ide kell tűznünk. Nekünk most két
 adatunk van (átlag és medián), tehát általánosságban véve arra van
 reményünk, hogy olyan eloszlásokat tudjunk illeszteni, amiket két
-paraméter határoz meg! Ez egyfajta limitáció, például a lognormálisnak
+paraméter határoz meg. Ez egyfajta limitáció, például a lognormálisnak
 is van háromparaméteres kiterjesztése ([Kuk és mtsai.
 2017](#ref-kuk2017)), lehet a standardizált logaritmizált adatokra
-$t$-eloszlást illeszti a normális helyett ([Budge, Ingolfsson, és Zerom
+$t$-eloszlást illeszti a normális helyett ([Budge és mtsai.
 2010](#ref-budge2010)), elég gyakran fordulnak elő location-scale
 családok több paraméterrel ([Zhang és mtsai. 2016](#ref-zhang2016)),
 stb., ezeket általánosságban nem tudjuk meghatározni. Ennek megfelelően
@@ -594,7 +785,7 @@ library(ggplot2)
 theme_set(theme_bw())
 ```
 
-Töltsük le (a blogról), aztán pedig be az adatokat:
+Töltsük le a blogról az adatokat, aztán pedig olvassuk be azokat:
 
 ``` r
 if(!file.exists("M_23.csv"))
@@ -651,12 +842,10 @@ $e^{\mu}$, így a feladat lényegében az, hogy a következő
 egyenletrendszert oldjuk meg $\mu$-re és $\sigma^2$-re ($\bar{x}$ az
 átlag, $m$ a medián):
 
-$$
-\begin{align}
+$$\begin{align}
 e^{\mu + \frac{\sigma^2}{2}} &= \bar{x} \\
 e^{\mu} &= m
-\end{align}
-$$
+\end{align}$$
 
 A dolog nem nehéz: a második egyenletből $\mu = \log m$ (a $\log$ alatt
 mindenhol természetes alapú logaritmust értek), ezt az elsőbe
@@ -666,12 +855,10 @@ $\sigma^2 = 2 \cdot \left(\log\bar{x} - \log m\right)\text{.}$
 So far so good, ahogy a művelt francia mondaná. Igen ám, csakhogy. Mi a
 helyzet a Weibull-eloszlással? Az egyenletrendszer:
 
-$$
-\begin{align}
+$$\begin{align}
 \lambda \cdot \Gamma\left(1 + 1/k\right) &= \bar{x} \\
 \lambda \cdot \left(\log 2\right)^{1/k} &= m
-\end{align}
-$$
+\end{align}$$
 
 Nem vagyok rendes elméleti matematikus, de elég erős a gyanúm, hogy
 ennek az egyenletrendszernek nincs zárt alakú megoldása. (A
@@ -971,7 +1158,7 @@ pairs(RawDataWide[, .(P90, P90lnorm, P90gamma, P90weibull,
       })
 ```
 
-<img src="README_files/figure-gfm/unnamed-chunk-29-1.png" width="100%" />
+<img src="README_files/figure-gfm/unnamed-chunk-33-1.png" alt="" width="100%" />
 
 Az eloszlásfüggvény-értékek:
 
@@ -984,7 +1171,7 @@ pairs(RawDataWide[, .(CDF15, CDF15lnorm, CDF15gamma, CDF15weibull,
       })
 ```
 
-<img src="README_files/figure-gfm/unnamed-chunk-30-1.png" width="100%" />
+<img src="README_files/figure-gfm/unnamed-chunk-34-1.png" alt="" width="100%" />
 
 Kiváló! (Ami természetesen nem azt jelenti, hogy maguk a becslések jók,
 hiszen ez azon a problémán nem segít, hogy az eloszlást nem ismerjük, de
@@ -1061,8 +1248,7 @@ saveRDS(RawDataProc, "OMSZ-kierkezesi-ido-long.rds")
 
 ## Irodalomjegyzék
 
-<div id="refs" class="references csl-bib-body hanging-indent"
-entry-spacing="0">
+<div id="refs" class="references csl-bib-body hanging-indent">
 
 <div id="ref-aladdini2010" class="csl-entry">
 
@@ -1082,8 +1268,8 @@ medical services”. *Management Science* 56 (4): 716–23.
 
 <div id="ref-chong2016" class="csl-entry">
 
-Chong, Kenneth. 2016. „Models for decision-making and performance
-evaluation in emergency medical service systems”.
+Chong, Kenneth. 2016. *Models for decision-making and performance
+evaluation in emergency medical service systems*.
 
 </div>
 
@@ -1100,8 +1286,7 @@ Management Science* 11: 262–74.
 
 Kuk, Megan, Steven Butt, Tycho Fredericks, Osama Abudayyeh, és Anil
 Kumar. 2017. „Statistical investigation of modeling EMS response time:
-Michigan case study”. In *IIE Annual Conference. Proceedings*, 830–35.
-Institute of Industrial; Systems Engineers (IISE).
+Michigan case study”. *IIE Annual Conference. Proceedings*, 830–35.
 
 </div>
 
@@ -1210,8 +1395,8 @@ Research Part C: Emerging Technologies* 65: 97–110.
     alkalmazási területeit.
 
 [^6]: Ilyen szempontból persze még jobb lenne a 95., a 99., a 99,9. stb.
-    percentilis használata, hiszen azok egyre jobban *tényleg* a
-    legszélét jelzik az eloszlásnak. A probléma az, hogy egyre romlik a
+    percentilis használata, hiszen azok egyre jobban tényleg a legszélét
+    jelzik az eloszlásnak. A probléma az, hogy egyre romlik a
     becsülhetőségük: gondoljunk bele, a 99. percentilis 100 adatból a
     sorban 99. – de mi van akkor, ha mondjuk összesen csak 50
     megfigyelésünk van? Egész pontosan az fog történni, hogy minél
@@ -1243,3 +1428,17 @@ Research Part C: Emerging Technologies* 65: 97–110.
     számba sűrített mutatónk van, másrészt, ha továbbvisszük a
     gondolatot, akkor végeredményben kilyukadunk oda, hogy plottoljuk ki
     az egész eloszlásfüggvényt (vagy épp a hisztogramot).
+
+[^9]: A különbségek átlaga (becsült mínusz valódi átlaga) ugyanaz, mint
+    az átlagok különbsége (becsült átlaga mínusz valódi átlaga), vagyis
+    ez az lesz, hogy a becslések átlaga mennyivel tér el a valódi
+    értékek átlagától. Ami pont jó, ugyanis ez a precíz definíciója
+    annak, hogy „tendenciózusan inkább alatta/felette”: hogy átlagosan
+    is hibás a becslés.
+
+[^10]: Ha mondjuk ez egy építkezési késés, ahol minden nap után kötbért
+    kell fizetnünk, akkor az eltérés abszolút értéke számít, mindegy,
+    hogy 1 nap helyett végzünk 2 nap alatt, vagy 1000 helyett végzünk
+    1001 nap alatt. De ha ez egy mérőműszer pontatlansága, akkor az
+    utóbbi helyzet pontosabb műszert jelez, mert 1000 kg-ot nehezebb 1
+    kg pontossággal mérni, mint 1 kg-ot.
