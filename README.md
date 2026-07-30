@@ -120,9 +120,9 @@ Ferenci Tamás (<https://www.medstat.hu/>)<br>
   hangsúlyoztam, hogy ha a becsléseim véletlenül nem jók, akkor sincsen
   semmi baj, mert az OMSZ ezt egy pillanat alatt tisztázhatja azzal,
   hogy kiadja a valódi értékeket. (Az már egészen más, nem statisztikai
-  lapra tartozik, hogy az OMSZ sem azt nem volt hajlandó mondani annak
-  idején, hogy jók a becsléseim, sem azt, hogy rosszak, csak azt, hogy
-  el az ártó kezekkel az életmentőktől.) De persze, nem fogom letagadni,
+  kérdés, hogy az OMSZ sem azt nem volt hajlandó mondani annak idején,
+  hogy jók a becsléseim, sem azt, hogy rosszak, csak azt, hogy el az
+  ártó kezekkel az életmentőktől.) De persze, nem fogom letagadni,
   rendkívül kíváncsi lettem, hogy azért mennyire is jók.
 - A talán legfontosabb kategóriában, a Kiemelt P1 prioritás országos
   adatában 0,6 perc volt a becslésem átlagos tévedése (3,4% hiba).
@@ -593,7 +593,7 @@ adatkérést is közzétette, egyszercsak minden további nélkül
 vonatkozó, korábban szívósan visszatartott adatokat.
 
 Ez történelmi esemény – bármilyen szomorú is, hogy ilyet kell mondanom
-2026-ban egy ilyen az adatközlésre, de hazai viszonylat tényleg az.
+2026-ban egy ilyen az adatközlésre, de hazai viszonylatban tényleg az.
 Hatalmas örömhír, és rendkívül biztató a jövőre nézve, ha ez a felfogás
 és hozzáállás válik uralkodóvá az OMSZ-on belül, még jobb esetben az
 egész egészségügyben. De ne feledkezzünk meg a múltról sem, hiszen ez az
